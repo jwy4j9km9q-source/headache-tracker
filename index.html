@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>頭痛追跡記録ツール</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans JP', 'Segoe UI', sans-serif; background: linear-gradient(135deg, #f0f4f8 0%, #e8f0f7 100%); padding: 16px; min-height: 100vh; }
+        .container { max-width: 700px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #5b7fd8 0%, #7b5db8 100%); color: white; padding: 24px 20px; border-radius: 12px; margin-bottom: 20px; text-align: center; box-shadow: 0 4px 15px rgba(91, 127, 216, 0.2); }
+        .header h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+        .header p { font-size: 13px; opacity: 0.9; }
+        .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+        .tab-btn { flex: 1; padding: 12px; border: 2px solid #e8ecf1; background: white; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px; transition: all 0.2s; color: #666; }
+        .tab-btn.active { background: linear-gradient(135deg, #5b7fd8 0%, #7b5db8 100%); color: white; border-color: #5b7fd8; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); border: 1px solid #f0f0f0; }
+        .section-title { font-size: 14px; font-weight: 700; color: #333; margin-bottom: 14px; display: flex; align-items: center; padding-bottom: 10px; border-bottom: 2px solid #e8ecf1; }
+        .section-icon { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, #5b7fd8 0%, #7b5db8 100%); color: white; display: flex; align-items: center; justify-content: center; margin-right: 8px; font-size: 12px; font-weight: bold; }
+        .location-pain-group { margin-bottom: 16px; padding: 12px; background: #f8f9fc; border-radius: 8px; border: 1px solid #e8ecf1; }
+        .location-label { font-weight: 600; font-size: 13px; color: #555; margin-bottom: 8px; }
+        .pain-type-buttons { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 8px; }
+        .pain-btn { padding: 8px; border: 1.5px solid #e8ecf1; background: white; border-radius: 6px; font-size: 12px; cursor: pointer; transition: all 0.2s; color: #666; font-weight: 500; }
+        .pain-btn.selected { background: #e8f0ff; border-color: #5b7fd8; color: #5b7fd8; font-weight: 600; }
+        .pain-clear-btn { padding: 6px 12px; border: 1.5px solid #e8ecf1; background: #fff5f5; border-radius: 6px; font-size: 11px; cursor: pointer; color: #c62828; font-weight: 500; width: 100%; }
+        .checkbox-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+        .checkbox-item, .radio-item { display: flex; align-items: center; background: #f8f9fc; padding: 10px 12px; border-radius: 8px; border: 1.5px solid #e8ecf1; cursor: pointer; transition: all 0.2s; }
+        .checkbox-item.checked, .radio-item.checked { background: #e8f0ff; border-color: #5b7fd8; }
+        .checkbox-item input, .radio-item input { margin-right: 8px; cursor: pointer; width: 16px; height: 16px; }
+        .checkbox-item label, .radio-item label { cursor: pointer; font-size: 13px; color: #444; flex: 1; }
+        .radio-group { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+        label { font-weight: 600; font-size: 13px; color: #555; display: block; margin-bottom: 8px; margin-top: 12px; }
+        input[type="text"], input[type="number"], textarea { width: 100%; padding: 10px 12px; border: 1.5px solid #e8ecf1; border-radius: 8px; font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: #444; margin-bottom: 12px; display: block; box-sizing: border-box; }
+        input[type="date"], input[type="time"] { width: 100% !important; padding: 10px 12px !important; border: 1.5px solid #e8ecf1 !important; border-radius: 8px !important; font-size: 13px !important; color: #444 !important; margin-bottom: 12px !important; display: block !important; box-sizing: border-box !important; text-align: center !important; -webkit-appearance: none !important; appearance: none !important; }
+        select { width: 100%; padding: 10px 12px; border: 1.5px solid #e8ecf1; border-radius: 8px; font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: #444; margin-bottom: 12px; background-color: white; cursor: pointer; }
+        button { padding: 12px 16px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'Noto Sans JP', sans-serif; }
+        .btn-primary { background: linear-gradient(135deg, #5b7fd8 0%, #7b5db8 100%); color: white; width: 100%; margin-bottom: 10px; }
+        .btn-secondary { background: #f0f3f9; color: #666; border: 1.5px solid #e8ecf1; width: 100%; }
+        .success-message { display: none; background: #e8f5e9; color: #2e7d32; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 13px; font-weight: 500; border-left: 4px solid #4caf50; }
+        .success-message.show { display: block; }
+        .error-message { display: none; background: #ffebee; color: #c62828; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 13px; font-weight: 500; border-left: 4px solid #ef5350; }
+        .error-message.show { display: block; }
+        .timeline { position: relative; padding-left: 30px; }
+        .timeline-item { position: relative; margin-bottom: 20px; padding: 12px; background: #f8f9fc; border-radius: 8px; border-left: 4px solid #5b7fd8; }
+        .timeline-time { font-weight: 700; color: #333; margin-bottom: 6px; font-size: 12px; }
+        .timeline-content { font-size: 12px; color: #555; line-height: 1.6; }
+        .time-display { background: rgba(91, 127, 216, 0.1); padding: 8px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; color: #5b7fd8; margin-bottom: 12px; text-align: center; }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); }
+        .modal.show { display: block; }
+        .modal-content { background-color: white; margin: 20% auto; padding: 20px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+        .modal-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: #333; }
+        .modal-buttons { display: flex; flex-direction: column; gap: 10px; }
+        .modal-btn { padding: 12px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'Noto Sans JP', sans-serif; }
+        .modal-btn-pdf { background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; }
+        .modal-btn-csv { background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%); color: white; }
+        .modal-btn-both { background: linear-gradient(135deg, #5b7fd8 0%, #7b5db8 100%); color: white; }
+        .modal-btn-cancel { background: #f0f3f9; color: #666; border: 1.5px solid #e8ecf1; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 頭痛追跡記録</h1>
+            <p>痛みの発作をリアルタイムで追跡</p>
+        </div>
+
+        <div id="successMessage" class="success-message">✅ 記録しました！</div>
+        <div id="errorMessage" class="error-message">⚠️ エラーが発生しました。もう一度試してください。</div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(event, 'initial')">📝 発作開始</button>
+            <button class="tab-btn" onclick="switchTab(event, 'followup')">⏱️ 追加記録</button>
+            <button class="tab-btn" onclick="switchTab(event, 'timeline')">📊 タイムライン</button>
+        </div>
+
+        <div id="initial" class="tab-content active">
+            <div class="card">
+                <div class="section-title"><div class="section-icon">1</div>発作が始まった日時</div>
+                <div class="time-display" id="timeDisplay">現在時刻: --:--</div>
+                <label>日付</label>
+                <input type="date" id="initialDate">
+                <label>時刻</label>
+                <input type="time" id="initialTime">
+            </div>
+
+            <div class="card">
+                <div class="section-title"><div class="section-icon">2</div>痛みの場所と種類</div>
+                <div id="painLocations"></div>
+            </div>
+
+            <div class="card">
+                <div class="section-title"><div class="section-icon">3</div>頭痛の程度</div>
+                <div class="radio-group" id="severityGroup"></div>
+            </div>
+
+            <div class="card">
+                <div class="section-title"><div class="section-icon">4</div>筋緊張（複数選択可）</div>
+                <div class="checkbox-group" id="tensionGroup"></div>
+            </div>
+
+            <div class="card">
+                <div class="section-title"><div class="section-icon">5</div>その他の痛み（複数選択可）</div>
+                <div class="checkbox-group" id="otherPainGroup"></div>
+            </div>
+
+            <div class="card">
+                <div class="section-title"><div class="section-icon">6</div>痛み以外の症状（複数選択可）</div>
+                <div class="checkbox-group" id="symptomGroup"></div>
+            </div>
+
+            <div class="card">
+                <div class="section-title"><div class="section-icon">7</div>今、生活に支障が出ていますか？</div>
+                <div class="radio-group" id="impactGroup"></div>
+            </div>
+
+            <div class="card">
+                <div class="section-title"><div class="section-icon">8</div>自由メモ</div>
+                <textarea id="freeNote" placeholder="何か気になることがあれば自由に書いてください"></textarea>
+                <button class="btn-primary" onclick="startTracking()">📍 この発作の記録を開始</button>
+            </div>
+        </div>
+
+        <div id="followup" class="tab-content">
+            <div class="card">
+                <div class="section-title"><div class="section-icon">⏱️</div>追加記録（進展の記録）</div>
+
+                <div id="noSessions" style="text-align: center; padding: 20px; color: #999;">
+                    まずは「発作開始」タブで、発作を記録してください。
+                </div>
+
+                <div id="followupForm" style="display: none;">
+                    <label>記録する発作を選んでください</label>
+                    <select id="sessionSelector" onchange="updateFollowupSession()">
+                        <option value="">-- 発作を選択 --</option>
+                    </select>
+
+                    <div id="sessionInfo" style="display: none; background: #e8f5e9; padding: 12px; border-radius: 8px; margin-bottom: 12px; font-size: 12px; color: #2e7d32;">
+                        発作開始時刻: <span id="sessionStartDisplay"></span>
+                    </div>
+
+                    <label>現在の時刻</label>
+                    <input type="time" id="followupTime">
+
+                    <label>痛みの推移</label>
+                    <div class="radio-group">
+                        <div class="radio-item"><input type="radio" id="fu_trend_none" name="followupTrend" value=""><label for="fu_trend_none">選択なし</label></div>
+                        <div class="radio-item"><input type="radio" id="fu_trend_down" name="followupTrend" value="下がってきている"><label for="fu_trend_down">↓下がってきている</label></div>
+                        <div class="radio-item"><input type="radio" id="fu_trend_same" name="followupTrend" value="変わらない"><label for="fu_trend_same">→変わらない</label></div>
+                        <div class="radio-item"><input type="radio" id="fu_trend_up" name="followupTrend" value="上がってきている"><label for="fu_trend_up">↑上がってきている</label></div>
+                    </div>
+
+                    <label style="margin-top: 12px;">痛みの部位と種類の更新</label>
+                    <div id="followupPainLocations"></div>
+
+                    <label>この時点での記録内容</label>
+                    <textarea id="followupNote" placeholder="例）薬を飲んだ、症状が少し良くなった"></textarea>
+
+                    <label>生活支障度の変化</label>
+                    <div class="radio-group">
+                        <div class="radio-item"><input type="radio" id="fu_impact_none" name="followupImpact" value=""><label for="fu_impact_none">選択なし</label></div>
+                        <div class="radio-item"><input type="radio" id="fu_impact_no" name="followupImpact" value="支障なし"><label for="fu_impact_no">支障なし</label></div>
+                        <div class="radio-item"><input type="radio" id="fu_impact_small" name="followupImpact" value="少しある"><label for="fu_impact_small">少しある</label></div>
+                        <div class="radio-item"><input type="radio" id="fu_impact_medium" name="followupImpact" value="中程度"><label for="fu_impact_medium">中程度</label></div>
+                        <div class="radio-item"><input type="radio" id="fu_impact_large" name="followupImpact" value="大きい"><label for="fu_impact_large">大きい</label></div>
+                    </div>
+
+                    <label style="margin-top: 12px;">服薬時刻と効き目</label>
+                    <input type="time" id="medTime" placeholder="薬を飲んだ時刻">
+                    <input type="text" id="medName" placeholder="薬の名前">
+                    
+                    <label>効き目</label>
+                    <div class="radio-group">
+                        <div class="radio-item"><input type="radio" id="fu_effect_none" name="followupEffect" value=""><label for="fu_effect_none">選択なし</label></div>
+                        <div class="radio-item"><input type="radio" id="fu_effect_good" name="followupEffect" value="効いた◎"><label for="fu_effect_good">効いた◎</label></div>
+                        <div class="radio-item"><input type="radio" id="fu_effect_partial" name="followupEffect" value="やや効いた△"><label for="fu_effect_partial">やや効いた△</label></div>
+                        <div class="radio-item"><input type="radio" id="fu_effect_no" name="followupEffect" value="効かなかった×"><label for="fu_effect_no">効かなかった×</label></div>
+                    </div>
+
+                    <label style="margin-top: 12px;">効きはじめるまでの時間</label>
+                    <div class="radio-group">
+                        <div class="radio-item"><input type="radio" id="fu_onset_none" name="followupOnset" value=""><label for="fu_onset_none">選択なし</label></div>
+                        <div class="radio-item"><input type="radio" id="fu_onset_15" name="followupOnset" value="15分以内"><label for="fu_onset_15">15分以内</label></div>
+                        <div class="radio-item"><input type="radio" id="fu_onset_30" name="followupOnset" value="30分程度"><label for="fu_onset_30">30分程度</label></div>
+                        <div class="radio-item"><input type="radio" id="fu_onset_1h" name="followupOnset" value="1時間程度"><label for="fu_onset_1h">1時間程度</label></div>
+                        <div class="radio-item"><input type="radio" id="fu_onset_slow" name="followupOnset" value="1時間以上"><label for="fu_onset_slow">1時間以上</label></div>
+                    </div>
+
+                    <button class="btn-primary" onclick="addFollowup()" style="margin-top: 16px;">➕ 追加記録を保存</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="timeline" class="tab-content">
+            <div class="card">
+                <div class="section-title"><div class="section-icon">📊</div>発作の経過（時系列）</div>
+                <div id="timelineDisplay" style="color: #999; text-align: center; padding: 20px;">
+                    まずは「発作開始」タブで記録してください。
+                </div>
+            </div>
+
+            <div class="card" style="text-align: center;">
+                <button class="btn-secondary" onclick="openExportModal()">📥 データをエクスポート</button>
+                <button class="btn-secondary" onclick="clearAllSessions()" style="margin-top: 10px; background: #ffebee; color: #c62828;">🗑️ 全ての記録を削除</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="exportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-title">📥 データをエクスポート</div>
+            <p style="font-size: 13px; color: #666; margin-bottom: 16px;">保存形式を選んでください</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-pdf" onclick="exportPDF()">📄 PDF で保存</button>
+                <button class="modal-btn modal-btn-csv" onclick="exportCSV()">📊 CSV で保存</button>
+                <button class="modal-btn modal-btn-both" onclick="exportBoth()">🔁 両方保存</button>
+                <button class="modal-btn modal-btn-cancel" onclick="closeExportModal()">キャンセル</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const painLocations = ['目の奥', 'こめかみ', '眉間', 'おでこの奥', '側頭部', '頭全体'];
+        const painTypes = ['ズキンズキン', 'ジンジン', 'ジーン'];
+        const tensions = ['後頭部', '首筋', '肩', '背中'];
+        const otherPains = ['顎が痛い', '奥歯が痛い'];
+        const symptoms = ['吐き気', '嘔吐', '光が眩しい', '音過敏'];
+        const severities = ['軽度', '中程度', '重度'];
+        const impacts = ['支障なし', '少しある', '中程度', '大きい'];
+
+        let currentSessionId = null;
+
+        function updateTimeDisplay() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            
+            document.getElementById('timeDisplay').textContent = `現在時刻: ${hours}:${minutes}`;
+            
+            if (document.getElementById('initialDate').value === '') {
+                document.getElementById('initialDate').value = `${year}-${month}-${day}`;
+            }
+            if (document.getElementById('initialTime').value === '') {
+                document.getElementById('initialTime').value = `${hours}:${minutes}`;
+            }
+        }
+
+        updateTimeDisplay();
+
+        function initializeUI() {
+            const painLocationsContainer = document.getElementById('painLocations');
+            painLocations.forEach(location => {
+                const div = document.createElement('div');
+                div.className = 'location-pain-group';
+                div.innerHTML = `<div class="location-label">${location}</div><div class="pain-type-buttons" data-location="${location}">${painTypes.map(type => `<button type="button" class="pain-btn" data-type="${type}" onclick="selectPainType(event, '${location}')">${type}</button>`).join('')}</div><button type="button" class="pain-clear-btn" onclick="clearPainType('${location}')">✕ リセット</button>`;
+                painLocationsContainer.appendChild(div);
+            });
+
+            ['severityGroup', 'impactGroup'].forEach(groupId => {
+                const group = document.getElementById(groupId);
+                const options = groupId === 'severityGroup' ? severities : impacts;
+                group.innerHTML = `<div class="radio-item"><input type="radio" id="${groupId}_none" name="${groupId}" value=""><label for="${groupId}_none">選択なし</label></div>`;
+                options.forEach((opt, idx) => {
+                    group.innerHTML += `<div class="radio-item"><input type="radio" id="${groupId}_${idx}" name="${groupId}" value="${opt}"><label for="${groupId}_${idx}">${opt}</label></div>`;
+                });
+            });
+
+            [{ id: 'tensionGroup', options: tensions }, { id: 'otherPainGroup', options: otherPains }, { id: 'symptomGroup', options: symptoms }].forEach(({ id, options }) => {
+                const group = document.getElementById(id);
+                options.forEach((opt, idx) => {
+                    group.innerHTML += `<div class="checkbox-item"><input type="checkbox" id="${id}_${idx}" value="${opt}"><label for="${id}_${idx}">${opt}</label></div>`;
+                });
+            });
+
+            document.querySelectorAll('input[type="radio"]').forEach(input => {
+                input.addEventListener('change', function() {
+                    document.querySelectorAll(`input[name="${this.name}"]`).forEach(i => i.parentElement.classList.remove('checked'));
+                    this.parentElement.classList.add('checked');
+                });
+            });
+
+            document.querySelectorAll('input[type="checkbox"]').forEach(input => {
+                input.addEventListener('change', function() {
+                    this.parentElement.classList.toggle('checked', this.checked);
+                });
+            });
+        }
+
+        initializeUI();
+
+        function selectPainType(event, location) {
+            event.preventDefault();
+            const btn = event.target;
+            const buttons = btn.parentElement.querySelectorAll('.pain-btn');
+            buttons.forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+        }
+
+        function clearPainType(location) {
+            document.querySelectorAll(`[data-location="${location}"] .pain-btn`).forEach(b => b.classList.remove('selected'));
+        }
+
+        function switchTab(event, tabName) {
+            event.preventDefault();
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            if (tabName === 'followup') updateFollowupForm();
+            if (tabName === 'timeline') updateTimeline();
+        }
+
+        function startTracking() {
+            const initialDate = document.getElementById('initialDate').value;
+            const initialTime = document.getElementById('initialTime').value;
+            const sessionId = `session_${initialDate.replace(/-/g, '')}_${initialTime.replace(/:/g, '')}`;
+            currentSessionId = sessionId;
+
+            const painData = {};
+            painLocations.forEach(location => {
+                const selected = document.querySelector(`[data-location="${location}"] .pain-btn.selected`);
+                if (selected) painData[location] = selected.dataset.type;
+            });
+
+            const session = {
+                id: sessionId,
+                startTime: `${initialDate} ${initialTime}`,
+                severity: document.querySelector('input[name="severityGroup"]:checked')?.value || '',
+                painData,
+                tensions: Array.from(document.querySelectorAll('input[id^="tensionGroup_"]:checked')).map(cb => cb.value),
+                otherPains: Array.from(document.querySelectorAll('input[id^="otherPainGroup_"]:checked')).map(cb => cb.value),
+                symptoms: Array.from(document.querySelectorAll('input[id^="symptomGroup_"]:checked')).map(cb => cb.value),
+                impact: document.querySelector('input[name="impactGroup"]:checked')?.value || '',
+                freeNote: document.getElementById('freeNote').value,
+                followups: []
+            };
+
+            localStorage.setItem(sessionId, JSON.stringify(session));
+            showSuccessMessage();
+            setTimeout(() => document.querySelectorAll('.tab-btn')[1].click(), 800);
+        }
+
+        function getAllSessions() {
+            const sessions = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('session_')) sessions.push(JSON.parse(localStorage.getItem(key)));
+            }
+            return sessions.sort((a, b) => a.startTime.localeCompare(b.startTime));
+        }
+
+        function updateFollowupForm() {
+            const sessions = getAllSessions();
+            if (sessions.length === 0) {
+                document.getElementById('noSessions').style.display = 'block';
+                document.getElementById('followupForm').style.display = 'none';
+                return;
+            }
+            document.getElementById('noSessions').style.display = 'none';
+            document.getElementById('followupForm').style.display = 'block';
+            const selector = document.getElementById('sessionSelector');
+            selector.innerHTML = '<option value="">-- 発作を選択 --</option>';
+            sessions.forEach(session => {
+                const option = document.createElement('option');
+                option.value = session.id;
+                option.textContent = `${session.startTime} (程度: ${session.severity || 'なし'})`;
+                selector.appendChild(option);
+            });
+        }
+
+        function updateFollowupSession() {
+            const sessionId = document.getElementById('sessionSelector').value;
+            if (!sessionId) {
+                document.getElementById('sessionInfo').style.display = 'none';
+                return;
+            }
+            currentSessionId = sessionId;
+            const session = JSON.parse(localStorage.getItem(sessionId));
+            document.getElementById('sessionInfo').style.display = 'block';
+            document.getElementById('sessionStartDisplay').textContent = session.startTime;
+        }
+
+        function addFollowup() {
+            if (!currentSessionId) return;
+            const session = JSON.parse(localStorage.getItem(currentSessionId));
+            const followup = {
+                time: document.getElementById('followupTime').value,
+                trend: document.querySelector('input[name="followupTrend"]:checked')?.value || '',
+                note: document.getElementById('followupNote').value,
+                impact: document.querySelector('input[name="followupImpact"]:checked')?.value || '',
+                medication: document.getElementById('medName').value ? { 
+                    time: document.getElementById('medTime').value,
+                    name: document.getElementById('medName').value,
+                    effect: document.querySelector('input[name="followupEffect"]:checked')?.value || '',
+                    onset: document.querySelector('input[name="followupOnset"]:checked')?.value || ''
+                } : null
+            };
+            session.followups.push(followup);
+            localStorage.setItem(currentSessionId, JSON.stringify(session));
+            showSuccessMessage();
+        }
+
+        function updateTimeline() {
+            const sessions = getAllSessions();
+            if (sessions.length === 0) {
+                document.getElementById('timelineDisplay').innerHTML = '<div style="color: #999; text-align: center; padding: 20px;">まずは「発作開始」タブで記録してください。</div>';
+                return;
+            }
+            let html = '<div class="timeline">';
+            sessions.forEach(session => {
+                html += `<div class="timeline-item"><div class="timeline-time">📍 ${session.startTime}</div><div class="timeline-content">`;
+                html += `程度: ${session.severity || 'なし'}<br>`;
+                html += `痛み: ${Object.entries(session.painData).map(([loc, type]) => `${loc}(${type})`).join(', ') || 'なし'}<br>`;
+                if (session.tensions.length) html += `筋緊張: ${session.tensions.join(', ')}<br>`;
+                if (session.otherPains.length) html += `その他: ${session.otherPains.join(', ')}<br>`;
+                if (session.symptoms.length) html += `症状: ${session.symptoms.join(', ')}<br>`;
+                html += `支障度: ${session.impact || 'なし'}<br>`;
+                if (session.freeNote) html += `メモ: ${session.freeNote}<br>`;
+                html += `</div></div>`;
+                if (session.followups?.length) {
+                    session.followups.forEach(fu => {
+                        html += `<div class="timeline-item"><div class="timeline-time">⏱️ ${fu.time}</div><div class="timeline-content">推移: ${fu.trend || 'なし'}<br>`;
+                        if (fu.note) html += `記録: ${fu.note}<br>`;
+                        if (fu.impact) html += `支障度: ${fu.impact}<br>`;
+                        if (fu.medication) html += `服薬: ${fu.medication.name}(${fu.medication.time}) - 効き目: ${fu.medication.effect || 'なし'}<br>`;
+                        html += `</div></div>`;
+                    });
+                }
+            });
+            html += '</div>';
+            document.getElementById('timelineDisplay').innerHTML = html;
+        }
+
+        function showSuccessMessage() {
+            const msg = document.getElementById('successMessage');
+            msg.classList.add('show');
+            setTimeout(() => msg.classList.remove('show'), 2000);
+        }
+
+        function showErrorMessage() {
+            const msg = document.getElementById('errorMessage');
+            msg.classList.add('show');
+            setTimeout(() => msg.classList.remove('show'), 3000);
+        }
+
+        function openExportModal() {
+            document.getElementById('exportModal').classList.add('show');
+        }
+
+        function closeExportModal() {
+            document.getElementById('exportModal').classList.remove('show');
+        }
+
+        function exportPDF() {
+            const sessions = getAllSessions();
+            if (sessions.length === 0) {
+                alert('記録がありません');
+                return;
+            }
+            let text = '頭痛追跡記録\n\n生成日時: ' + new Date().toLocaleString('ja-JP') + '\n\n';
+            sessions.forEach(session => {
+                text += '=== ' + session.startTime + ' ===\n';
+                text += '程度: ' + (session.severity || 'なし') + '\n';
+                text += '痛み: ' + Object.entries(session.painData).map(([loc, type]) => loc + '(' + type + ')').join(', ') + '\n';
+                if (session.tensions.length) text += '筋緊張: ' + session.tensions.join(', ') + '\n';
+                if (session.otherPains.length) text += '其他: ' + session.otherPains.join(', ') + '\n';
+                if (session.symptoms.length) text += '症状: ' + session.symptoms.join(', ') + '\n';
+                text += '支障度: ' + (session.impact || 'なし') + '\n';
+                if (session.freeNote) text += 'メモ: ' + session.freeNote + '\n';
+                if (session.followups?.length) {
+                    text += '\n追加記録:\n';
+                    session.followups.forEach(fu => {
+                        text += '  ' + fu.time + ': ' + (fu.trend || '-') + '\n';
+                        if (fu.note) text += '    ' + fu.note + '\n';
+                        if (fu.medication) text += '    服薬: ' + fu.medication.name + '\n';
+                    });
+                }
+                text += '\n';
+            });
+            const blob = new Blob([text], { type: 'text/plain;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = '頭痛記録.txt';
+            link.click();
+            showSuccessMessage();
+            closeExportModal();
+        }
+
+        function exportCSV() {
+            const sessions = getAllSessions();
+            if (sessions.length === 0) {
+                alert('記録がありません');
+                return;
+            }
+            const BOM = '\uFEFF';
+            let csv = BOM + '発作開始,程度,痛み,筋緊張,症状,支障度,メモ,追加記録時刻,効き目,薬名\n';
+            sessions.forEach(session => {
+                const painStr = Object.entries(session.painData).map(([loc, type]) => loc + ':' + type).join(';');
+                if (session.followups?.length) {
+                    session.followups.forEach(fu => {
+                        csv += `"${session.startTime}","${session.severity}","${painStr}","${session.tensions.join(',')}","${session.symptoms.join(',')}","${session.impact}","${session.freeNote}","${fu.time}","${fu.medication?.effect || ''}","${fu.medication?.name || ''}"\n`;
+                    });
+                } else {
+                    csv += `"${session.startTime}","${session.severity}","${painStr}","${session.tensions.join(',')}","${session.symptoms.join(',')}","${session.impact}","${session.freeNote}","","",""\n`;
+                }
+            });
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = '頭痛記録.csv';
+            link.click();
+            showSuccessMessage();
+            closeExportModal();
+        }
+
+        function exportBoth() {
+            exportPDF();
+            setTimeout(() => exportCSV(), 1000);
+        }
+
+        function clearAllSessions() {
+            if (confirm('全ての発作記録を削除してもよろしいですか？')) {
+                for (let i = localStorage.length - 1; i >= 0; i--) {
+                    const key = localStorage.key(i);
+                    if (key.startsWith('session_')) localStorage.removeItem(key);
+                }
+                alert('全ての記録を削除しました。');
+                updateFollowupForm();
+                updateTimeline();
+            }
+        }
+    </script>
+</body>
+</html>
