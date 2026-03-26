@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +9,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Noto Sans JP', 'Segoe UI', sans-serif; background: linear-gradient(135deg, #f0f4f8 0%, #e8f0f7 100%); padding: 16px; min-height: 100vh; }
         .container { max-width: 700px; margin: 0 auto; }
-        .header { background: linear-gradient(135deg, #5b7fd8 0%, #7b5db8 100%); color: white; padding: 24px 20px; border-radius: 12px; margin-bottom: 20px; text-align: center; box-shadow: 0 4px 15px rgba(91, 127, 216, 0.2); }
+        .header { background: linear-gradient(135deg, #5b7fd8 0%, #7b5db8 100%); color: white; padding: 24px 20px; border-radius: 12px; margin-bottom: 20px; text-align: center; box-shadow: 0 4px 15px rgba(91,127,216,0.2); }
         .header h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
         .header p { font-size: 13px; opacity: 0.9; }
         .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
@@ -16,9 +17,19 @@
         .tab-btn.active { background: linear-gradient(135deg, #5b7fd8 0%, #7b5db8 100%); color: white; border-color: #5b7fd8; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        .card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); border: 1px solid #f0f0f0; }
+        .card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #f0f0f0; }
         .section-title { font-size: 14px; font-weight: 700; color: #333; margin-bottom: 14px; display: flex; align-items: center; padding-bottom: 10px; border-bottom: 2px solid #e8ecf1; }
-        .section-icon { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, #5b7fd8 0%, #7b5db8 100%); color: white; display: flex; align-items: center; justify-content: center; margin-right: 8px; font-size: 12px; font-weight: bold; }
+        .section-icon { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, #5b7fd8 0%, #7b5db8 100%); color: white; display: flex; align-items: center; justify-content: center; margin-right: 8px; font-size: 12px; font-weight: bold; flex-shrink: 0; }
+        label { font-weight: 600; font-size: 13px; color: #555; display: block; margin-bottom: 8px; margin-top: 12px; }
+        input[type="text"], input[type="number"], textarea, select { width: 100%; padding: 10px 12px; border: 1.5px solid #e8ecf1; border-radius: 8px; font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: #444; margin-bottom: 12px; display: block; box-sizing: border-box; background: white; }
+        input[type="date"], input[type="time"] { width: 100% !important; padding: 10px 12px !important; border: 1.5px solid #e8ecf1 !important; border-radius: 8px !important; font-size: 13px !important; color: #444 !important; margin-bottom: 12px !important; display: block !important; box-sizing: border-box !important; text-align: center !important; -webkit-appearance: none !important; appearance: none !important; }
+        button { padding: 12px 16px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'Noto Sans JP', sans-serif; }
+        .btn-primary { background: linear-gradient(135deg, #5b7fd8 0%, #7b5db8 100%); color: white; width: 100%; margin-bottom: 10px; }
+        .btn-secondary { background: #f0f3f9; color: #666; border: 1.5px solid #e8ecf1; width: 100%; }
+        .btn-add { background: #e8f0ff; color: #5b7fd8; border: 1.5px solid #5b7fd8; border-radius: 8px; padding: 10px; width: 100%; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Noto Sans JP', sans-serif; }
+        .success-message { display: none; background: #e8f5e9; color: #2e7d32; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 13px; font-weight: 500; border-left: 4px solid #4caf50; }
+        .success-message.show { display: block; }
+        .time-display { background: rgba(91,127,216,0.1); padding: 8px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; color: #5b7fd8; margin-bottom: 12px; text-align: center; }
         .location-pain-group { margin-bottom: 16px; padding: 12px; background: #f8f9fc; border-radius: 8px; border: 1px solid #e8ecf1; }
         .location-label { font-weight: 600; font-size: 13px; color: #555; margin-bottom: 8px; }
         .pain-type-buttons { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 8px; }
@@ -31,508 +42,1029 @@
         .checkbox-item input, .radio-item input { margin-right: 8px; cursor: pointer; width: 16px; height: 16px; }
         .checkbox-item label, .radio-item label { cursor: pointer; font-size: 13px; color: #444; flex: 1; }
         .radio-group { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-        label { font-weight: 600; font-size: 13px; color: #555; display: block; margin-bottom: 8px; margin-top: 12px; }
-        input[type="text"], input[type="number"], textarea { width: 100%; padding: 10px 12px; border: 1.5px solid #e8ecf1; border-radius: 8px; font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: #444; margin-bottom: 12px; display: block; box-sizing: border-box; }
-        input[type="date"], input[type="time"] { width: 100% !important; padding: 10px 12px !important; border: 1.5px solid #e8ecf1 !important; border-radius: 8px !important; font-size: 13px !important; color: #444 !important; margin-bottom: 12px !important; display: block !important; box-sizing: border-box !important; text-align: center !important; -webkit-appearance: none !important; appearance: none !important; }
-        select { width: 100%; padding: 10px 12px; border: 1.5px solid #e8ecf1; border-radius: 8px; font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: #444; margin-bottom: 12px; background-color: white; cursor: pointer; }
-        button { padding: 12px 16px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'Noto Sans JP', sans-serif; }
-        .btn-primary { background: linear-gradient(135deg, #5b7fd8 0%, #7b5db8 100%); color: white; width: 100%; margin-bottom: 10px; }
-        .btn-secondary { background: #f0f3f9; color: #666; border: 1.5px solid #e8ecf1; width: 100%; }
-        .success-message { display: none; background: #e8f5e9; color: #2e7d32; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 13px; font-weight: 500; border-left: 4px solid #4caf50; }
-        .success-message.show { display: block; }
-        .error-message { display: none; background: #ffebee; color: #c62828; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 13px; font-weight: 500; border-left: 4px solid #ef5350; }
-        .error-message.show { display: block; }
-        .timeline { position: relative; padding-left: 30px; }
-        .timeline-item { position: relative; margin-bottom: 20px; padding: 12px; background: #f8f9fc; border-radius: 8px; border-left: 4px solid #5b7fd8; }
-        .timeline-time { font-weight: 700; color: #333; margin-bottom: 6px; font-size: 12px; }
-        .timeline-content { font-size: 12px; color: #555; line-height: 1.6; }
-        .time-display { background: rgba(91, 127, 216, 0.1); padding: 8px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; color: #5b7fd8; margin-bottom: 12px; text-align: center; }
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); }
-        .modal.show { display: block; }
-        .modal-content { background-color: white; margin: 20% auto; padding: 20px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
-        .modal-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: #333; }
-        .modal-buttons { display: flex; flex-direction: column; gap: 10px; }
-        .modal-btn { padding: 12px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'Noto Sans JP', sans-serif; }
-        .modal-btn-pdf { background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; }
-        .modal-btn-csv { background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%); color: white; }
-        .modal-btn-both { background: linear-gradient(135deg, #5b7fd8 0%, #7b5db8 100%); color: white; }
-        .modal-btn-cancel { background: #f0f3f9; color: #666; border: 1.5px solid #e8ecf1; }
-    </style>
+
+```
+    /* Weather */
+    .weather-card { background: linear-gradient(135deg, #e8f4fd, #f0f8ff); border: 1px solid #b3d9f7; border-radius: 8px; padding: 14px; margin-bottom: 12px; }
+    .weather-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px; }
+    .weather-val { font-weight: 700; color: #2c5f8a; }
+
+    /* Toggle chips */
+    .chip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+    .chip { padding: 10px 12px; border: 1.5px solid #e8ecf1; background: #f8f9fc; border-radius: 8px; font-size: 13px; color: #555; cursor: pointer; transition: all 0.2s; font-weight: 500; text-align: center; user-select: none; }
+    .chip.active { background: #e8f0ff; border-color: #5b7fd8; color: #5b7fd8; font-weight: 600; }
+    .chip-detail { background: #f0f4ff; border-radius: 8px; padding: 12px; margin-bottom: 8px; border: 1px solid #d0daf5; }
+
+    /* Timeline */
+    .session-card { border-radius: 12px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+    .session-card-header { padding: 16px; }
+    .severity-severe .session-card-header { background: linear-gradient(135deg, #fff5f5, #fff0f0); border-left: 5px solid #ef5350; }
+    .severity-moderate .session-card-header { background: linear-gradient(135deg, #fff8f0, #fff5ec); border-left: 5px solid #ff9800; }
+    .severity-mild .session-card-header { background: linear-gradient(135deg, #f5fff5, #f0fdf0); border-left: 5px solid #4caf50; }
+    .severity-none .session-card-header { background: #f8f9fc; border-left: 5px solid #9e9e9e; }
+    .session-tag { display: inline-block; background: white; border-radius: 20px; padding: 3px 10px; font-size: 11px; font-weight: 600; margin-right: 6px; margin-top: 4px; border: 1px solid rgba(0,0,0,0.1); }
+    .session-detail { font-size: 12px; color: #555; margin-top: 5px; line-height: 1.7; }
+    .followup-entry { border-top: 1px solid #f0f0f0; padding: 12px 16px; background: white; }
+    .followup-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+    .elapsed-badge { background: rgba(91,127,216,0.12); color: #5b7fd8; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+    .fu-row { font-size: 12px; color: #555; padding: 3px 0; line-height: 1.6; }
+    .fu-row.fu-med { color: #5b4f8a; font-weight: 500; }
+    .fu-row.fu-med-track { color: #2e6da4; font-weight: 500; }
+    .fu-row.fu-treatment { color: #2e7d42; }
+    .fu-row.fu-note { color: #444; font-style: italic; }
+
+    /* Medication tracking */
+    .med-track-card { background: #f5f0ff; border: 1.5px solid #d0bfff; border-radius: 8px; padding: 12px; margin-bottom: 8px; }
+    .med-track-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .med-track-detail { margin-top: 10px; padding-top: 10px; border-top: 1px solid #d0bfff; }
+    .elapsed-info { background: rgba(91,127,216,0.1); padding: 6px 10px; border-radius: 6px; font-size: 12px; font-weight: 500; color: #5b7fd8; margin-bottom: 8px; text-align: center; }
+    .new-med-entry { background: #e8f0ff; border: 1.5px solid #b3c8f5; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; font-size: 12px; display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .new-med-entry strong { color: #5b7fd8; font-size: 13px; }
+
+    /* Modal */
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
+    .modal.show { display: block; }
+    .modal-content { background-color: white; margin: 20% auto; padding: 20px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .modal-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: #333; }
+    .modal-buttons { display: flex; flex-direction: column; gap: 10px; }
+    .modal-btn { padding: 12px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Noto Sans JP', sans-serif; }
+    .modal-btn-pdf { background: linear-gradient(135deg, #ff6b6b, #ee5a6f); color: white; }
+    .modal-btn-csv { background: linear-gradient(135deg, #4ecdc4, #44a08d); color: white; }
+    .modal-btn-both { background: linear-gradient(135deg, #5b7fd8, #7b5db8); color: white; }
+    .modal-btn-cancel { background: #f0f3f9; color: #666; border: 1.5px solid #e8ecf1; }
+</style>
+```
+
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🏥 頭痛追跡記録</h1>
-            <p>痛みの発作をリアルタイムで追跡</p>
-        </div>
+<div class="container">
+    <div class="header">
+        <h1>🏥 頭痛追跡記録</h1>
+        <p>痛みの発作をリアルタイムで追跡</p>
+    </div>
+    <div id="successMessage" class="success-message">✅ 記録しました！</div>
 
-        <div id="successMessage" class="success-message">✅ 記録しました！</div>
-        <div id="errorMessage" class="error-message">⚠️ エラーが発生しました。もう一度試してください。</div>
+```
+<div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(event,'initial')">📝 発作開始</button>
+    <button class="tab-btn" onclick="switchTab(event,'followup')">⏱️ 追加記録</button>
+    <button class="tab-btn" onclick="switchTab(event,'timeline')">📊 タイムライン</button>
+</div>
 
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab(event, 'initial')">📝 発作開始</button>
-            <button class="tab-btn" onclick="switchTab(event, 'followup')">⏱️ 追加記録</button>
-            <button class="tab-btn" onclick="switchTab(event, 'timeline')">📊 タイムライン</button>
-        </div>
-
-        <div id="initial" class="tab-content active">
-            <div class="card">
-                <div class="section-title"><div class="section-icon">1</div>発作が始まった日時</div>
-                <div class="time-display" id="timeDisplay">現在時刻: --:--</div>
-                <label>日付</label>
-                <input type="date" id="initialDate">
-                <label>時刻</label>
-                <input type="time" id="initialTime">
-            </div>
-
-            <div class="card">
-                <div class="section-title"><div class="section-icon">2</div>痛みの場所と種類</div>
-                <div id="painLocations"></div>
-            </div>
-
-            <div class="card">
-                <div class="section-title"><div class="section-icon">3</div>頭痛の程度</div>
-                <div class="radio-group" id="severityGroup"></div>
-            </div>
-
-            <div class="card">
-                <div class="section-title"><div class="section-icon">4</div>筋緊張（複数選択可）</div>
-                <div class="checkbox-group" id="tensionGroup"></div>
-            </div>
-
-            <div class="card">
-                <div class="section-title"><div class="section-icon">5</div>その他の痛み（複数選択可）</div>
-                <div class="checkbox-group" id="otherPainGroup"></div>
-            </div>
-
-            <div class="card">
-                <div class="section-title"><div class="section-icon">6</div>痛み以外の症状（複数選択可）</div>
-                <div class="checkbox-group" id="symptomGroup"></div>
-            </div>
-
-            <div class="card">
-                <div class="section-title"><div class="section-icon">7</div>今、生活に支障が出ていますか？</div>
-                <div class="radio-group" id="impactGroup"></div>
-            </div>
-
-            <div class="card">
-                <div class="section-title"><div class="section-icon">8</div>自由メモ</div>
-                <textarea id="freeNote" placeholder="何か気になることがあれば自由に書いてください"></textarea>
-                <button class="btn-primary" onclick="startTracking()">📍 この発作の記録を開始</button>
-            </div>
-        </div>
-
-        <div id="followup" class="tab-content">
-            <div class="card">
-                <div class="section-title"><div class="section-icon">⏱️</div>追加記録（進展の記録）</div>
-
-                <div id="noSessions" style="text-align: center; padding: 20px; color: #999;">
-                    まずは「発作開始」タブで、発作を記録してください。
-                </div>
-
-                <div id="followupForm" style="display: none;">
-                    <label>記録する発作を選んでください</label>
-                    <select id="sessionSelector" onchange="updateFollowupSession()">
-                        <option value="">-- 発作を選択 --</option>
-                    </select>
-
-                    <div id="sessionInfo" style="display: none; background: #e8f5e9; padding: 12px; border-radius: 8px; margin-bottom: 12px; font-size: 12px; color: #2e7d32;">
-                        発作開始時刻: <span id="sessionStartDisplay"></span>
-                    </div>
-
-                    <label>現在の時刻</label>
-                    <input type="time" id="followupTime">
-
-                    <label>痛みの推移</label>
-                    <div class="radio-group">
-                        <div class="radio-item"><input type="radio" id="fu_trend_none" name="followupTrend" value=""><label for="fu_trend_none">選択なし</label></div>
-                        <div class="radio-item"><input type="radio" id="fu_trend_down" name="followupTrend" value="下がってきている"><label for="fu_trend_down">↓下がってきている</label></div>
-                        <div class="radio-item"><input type="radio" id="fu_trend_same" name="followupTrend" value="変わらない"><label for="fu_trend_same">→変わらない</label></div>
-                        <div class="radio-item"><input type="radio" id="fu_trend_up" name="followupTrend" value="上がってきている"><label for="fu_trend_up">↑上がってきている</label></div>
-                    </div>
-
-                    <label style="margin-top: 12px;">痛みの部位と種類の更新</label>
-                    <div id="followupPainLocations"></div>
-
-                    <label>この時点での記録内容</label>
-                    <textarea id="followupNote" placeholder="例）薬を飲んだ、症状が少し良くなった"></textarea>
-
-                    <label>生活支障度の変化</label>
-                    <div class="radio-group">
-                        <div class="radio-item"><input type="radio" id="fu_impact_none" name="followupImpact" value=""><label for="fu_impact_none">選択なし</label></div>
-                        <div class="radio-item"><input type="radio" id="fu_impact_no" name="followupImpact" value="支障なし"><label for="fu_impact_no">支障なし</label></div>
-                        <div class="radio-item"><input type="radio" id="fu_impact_small" name="followupImpact" value="少しある"><label for="fu_impact_small">少しある</label></div>
-                        <div class="radio-item"><input type="radio" id="fu_impact_medium" name="followupImpact" value="中程度"><label for="fu_impact_medium">中程度</label></div>
-                        <div class="radio-item"><input type="radio" id="fu_impact_large" name="followupImpact" value="大きい"><label for="fu_impact_large">大きい</label></div>
-                    </div>
-
-                    <label style="margin-top: 12px;">服薬時刻と効き目</label>
-                    <input type="time" id="medTime" placeholder="薬を飲んだ時刻">
-                    <input type="text" id="medName" placeholder="薬の名前">
-                    
-                    <label>効き目</label>
-                    <div class="radio-group">
-                        <div class="radio-item"><input type="radio" id="fu_effect_none" name="followupEffect" value=""><label for="fu_effect_none">選択なし</label></div>
-                        <div class="radio-item"><input type="radio" id="fu_effect_good" name="followupEffect" value="効いた◎"><label for="fu_effect_good">効いた◎</label></div>
-                        <div class="radio-item"><input type="radio" id="fu_effect_partial" name="followupEffect" value="やや効いた△"><label for="fu_effect_partial">やや効いた△</label></div>
-                        <div class="radio-item"><input type="radio" id="fu_effect_no" name="followupEffect" value="効かなかった×"><label for="fu_effect_no">効かなかった×</label></div>
-                    </div>
-
-                    <label style="margin-top: 12px;">効きはじめるまでの時間</label>
-                    <div class="radio-group">
-                        <div class="radio-item"><input type="radio" id="fu_onset_none" name="followupOnset" value=""><label for="fu_onset_none">選択なし</label></div>
-                        <div class="radio-item"><input type="radio" id="fu_onset_15" name="followupOnset" value="15分以内"><label for="fu_onset_15">15分以内</label></div>
-                        <div class="radio-item"><input type="radio" id="fu_onset_30" name="followupOnset" value="30分程度"><label for="fu_onset_30">30分程度</label></div>
-                        <div class="radio-item"><input type="radio" id="fu_onset_1h" name="followupOnset" value="1時間程度"><label for="fu_onset_1h">1時間程度</label></div>
-                        <div class="radio-item"><input type="radio" id="fu_onset_slow" name="followupOnset" value="1時間以上"><label for="fu_onset_slow">1時間以上</label></div>
-                    </div>
-
-                    <button class="btn-primary" onclick="addFollowup()" style="margin-top: 16px;">➕ 追加記録を保存</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="timeline" class="tab-content">
-            <div class="card">
-                <div class="section-title"><div class="section-icon">📊</div>発作の経過（時系列）</div>
-                <div id="timelineDisplay" style="color: #999; text-align: center; padding: 20px;">
-                    まずは「発作開始」タブで記録してください。
-                </div>
-            </div>
-
-            <div class="card" style="text-align: center;">
-                <button class="btn-secondary" onclick="openExportModal()">📥 データをエクスポート</button>
-                <button class="btn-secondary" onclick="clearAllSessions()" style="margin-top: 10px; background: #ffebee; color: #c62828;">🗑️ 全ての記録を削除</button>
-            </div>
+<!-- ===== TAB 1 ===== -->
+<div id="initial" class="tab-content active">
+    <div class="card">
+        <div class="section-title"><div class="section-icon">1</div>発作が始まった日時</div>
+        <div class="time-display" id="timeDisplay">現在時刻: --:--</div>
+        <label>日付</label><input type="date" id="initialDate">
+        <label>時刻</label><input type="time" id="initialTime">
+    </div>
+    <div class="card">
+        <div class="section-title"><div class="section-icon">2</div>痛みの場所と種類</div>
+        <div id="painLocations"></div>
+    </div>
+    <div class="card">
+        <div class="section-title"><div class="section-icon">3</div>頭痛の程度</div>
+        <div class="radio-group" id="severityGroup" style="grid-template-columns:1fr 1fr;"></div>
+    </div>
+    <div class="card">
+        <div class="section-title"><div class="section-icon">4</div>筋緊張（複数選択可）</div>
+        <div class="checkbox-group" id="tensionGroup"></div>
+    </div>
+    <div class="card">
+        <div class="section-title"><div class="section-icon">5</div>その他の痛み（複数選択可）</div>
+        <div class="checkbox-group" id="otherPainGroup"></div>
+    </div>
+    <div class="card">
+        <div class="section-title"><div class="section-icon">6</div>痛み以外の症状（複数選択可）</div>
+        <div class="checkbox-group" id="symptomGroup"></div>
+    </div>
+    <div class="card">
+        <div class="section-title"><div class="section-icon">7</div>今、生活に支障が出ていますか？</div>
+        <div class="radio-group" id="impactGroup" style="grid-template-columns:1fr 1fr;"></div>
+    </div>
+    <div class="card">
+        <div class="section-title"><div class="section-icon">8</div>天候・気圧</div>
+        <button onclick="fetchWeather()" id="weatherFetchBtn" style="background:#e8f4fd; color:#2c5f8a; border:1.5px solid #b3d9f7; border-radius:8px; padding:10px 16px; font-size:13px; font-weight:600; cursor:pointer; width:100%; font-family:'Noto Sans JP',sans-serif; margin-bottom:8px;">📡 現在の天候・気圧を取得</button>
+        <div id="weatherStatus" style="font-size:12px; color:#888; text-align:center; margin-bottom:8px;"></div>
+        <div id="weatherCard" class="weather-card" style="display:none;"></div>
+        <div id="weatherManual" style="display:none;">
+            <label>気圧（hPa）</label><input type="number" id="manualPressure" placeholder="例: 1008">
+            <label>天候</label>
+            <select id="manualCondition">
+                <option value="">-- 選択 --</option>
+                <option>快晴</option><option>晴れ</option><option>晴れ〜曇り</option><option>曇り</option><option>雨</option><option>強い雨</option><option>雪</option><option>霧</option><option>雷雨</option>
+            </select>
         </div>
     </div>
+    <div class="card">
+        <div class="section-title"><div class="section-icon">9</div>考えられるトリガー（複数選択可）</div>
+        <div id="triggerGrid" class="chip-grid"></div>
+        <div id="triggerDetails"></div>
+        <label>その他・詳細メモ</label>
+        <textarea id="triggerFreeNote" placeholder="気になることを自由に記入"></textarea>
+    </div>
+    <div class="card">
+        <div class="section-title"><div class="section-icon">10</div>自由メモ</div>
+        <textarea id="freeNote" placeholder="何か気になることがあれば自由に書いてください"></textarea>
+        <button class="btn-primary" onclick="startTracking()">📍 この発作の記録を開始</button>
+    </div>
+</div>
 
-    <div id="exportModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-title">📥 データをエクスポート</div>
-            <p style="font-size: 13px; color: #666; margin-bottom: 16px;">保存形式を選んでください</p>
-            <div class="modal-buttons">
-                <button class="modal-btn modal-btn-pdf" onclick="exportPDF()">📄 PDF で保存</button>
-                <button class="modal-btn modal-btn-csv" onclick="exportCSV()">📊 CSV で保存</button>
-                <button class="modal-btn modal-btn-both" onclick="exportBoth()">🔁 両方保存</button>
-                <button class="modal-btn modal-btn-cancel" onclick="closeExportModal()">キャンセル</button>
+<!-- ===== TAB 2 ===== -->
+<div id="followup" class="tab-content">
+    <div class="card">
+        <div class="section-title"><div class="section-icon">⏱️</div>追加記録（進展の記録）</div>
+        <div id="noSessions" style="text-align:center; padding:20px; color:#999;">まずは「発作開始」タブで発作を記録してください。</div>
+        <div id="followupForm" style="display:none;">
+            <label>記録する発作を選んでください</label>
+            <select id="sessionSelector" onchange="updateFollowupSession()"><option value="">-- 発作を選択 --</option></select>
+            <div id="sessionInfo" style="display:none; background:#e8f5e9; padding:12px; border-radius:8px; margin-bottom:12px; font-size:12px; color:#2e7d32;">
+                発作開始時刻: <span id="sessionStartDisplay"></span>
             </div>
+
+            <label>現在の日付</label>
+            <input type="date" id="followupDate">
+            <label>現在の時刻</label>
+            <input type="time" id="followupTime" onchange="updateAllElapsed()">
+
+            <label>痛みの推移</label>
+            <div class="radio-group">
+                <div class="radio-item"><input type="radio" id="fu_trend_down" name="followupTrend" value="下がってきている"><label for="fu_trend_down">↓下がってきている</label></div>
+                <div class="radio-item"><input type="radio" id="fu_trend_same" name="followupTrend" value="変わらない"><label for="fu_trend_same">→変わらない</label></div>
+                <div class="radio-item"><input type="radio" id="fu_trend_up" name="followupTrend" value="上がってきている"><label for="fu_trend_up">↑上がってきている</label></div>
+            </div>
+
+            <label>生活支障度の変化</label>
+            <div class="radio-group" style="grid-template-columns:1fr 1fr;">
+                <div class="radio-item"><input type="radio" id="fu_impact_no" name="followupImpact" value="支障なし"><label for="fu_impact_no">支障なし</label></div>
+                <div class="radio-item"><input type="radio" id="fu_impact_small" name="followupImpact" value="少しある"><label for="fu_impact_small">少しある</label></div>
+                <div class="radio-item"><input type="radio" id="fu_impact_medium" name="followupImpact" value="中程度"><label for="fu_impact_medium">中程度</label></div>
+                <div class="radio-item"><input type="radio" id="fu_impact_large" name="followupImpact" value="大きい"><label for="fu_impact_large">大きい</label></div>
+            </div>
+
+            <label>この時点でのメモ</label>
+            <textarea id="followupNote" placeholder="状態の変化、気づいたことなど"></textarea>
+
+            <!-- 服薬追跡 -->
+            <div id="medTrackingSection" style="display:none;">
+                <label style="color:#5b4f8a;">💊 服薬の経過追跡</label>
+                <div style="font-size:12px; color:#888; margin-bottom:8px;">この発作でこれまでに記録した服薬の、この時点での効果を追記できます</div>
+                <div id="medTrackingCards"></div>
+            </div>
+
+            <!-- 新しい服薬 -->
+            <label style="margin-top:16px;">💊 新しく服薬した場合</label>
+            <div id="newMedEntriesDisplay"></div>
+            <div style="background:#f8f9fc; border-radius:8px; padding:12px; border:1px solid #e8ecf1; margin-bottom:8px;">
+                <select id="medNameSel" onchange="toggleMedOtherNew()">
+                    <option value="">-- 薬を選択 --</option>
+                    <option value="エレトリプタン">エレトリプタン</option>
+                    <option value="アセトアミノフェン">アセトアミノフェン</option>
+                    <option value="ナルティーク">ナルティーク</option>
+                    <option value="SG配合顆粒">SG配合顆粒</option>
+                    <option value="__other__">その他（自由記入）</option>
+                    <option value="服薬なし">服薬なし</option>
+                </select>
+                <input type="text" id="medNameOtherNew" placeholder="薬の名前を入力" style="display:none;">
+                <label style="margin-top:4px;">飲んだ時刻</label>
+                <input type="time" id="medTimeSel" onchange="updateNewMedElapsed()">
+                <div id="newMedElapsedDisplay" style="display:none;" class="elapsed-info"></div>
+                <button class="btn-add" onclick="addNewMedEntry()" style="margin-top:10px;">＋ この服薬を記録に追加</button>
+            </div>
+
+            <!-- 対処法 -->
+            <label style="margin-top:4px;">🩹 対処法（複数選択可）</label>
+            <div id="treatmentGrid" class="chip-grid"></div>
+            <div id="treatmentDetails"></div>
+
+            <button class="btn-primary" onclick="addFollowup()" style="margin-top:16px;">➕ 追加記録を保存</button>
         </div>
     </div>
+</div>
 
-    <script>
-        const painLocations = ['目の奥', 'こめかみ', '眉間', 'おでこの奥', '側頭部', '頭全体'];
-        const painTypes = ['ズキンズキン', 'ジンジン', 'ジーン'];
-        const tensions = ['後頭部', '首筋', '肩', '背中'];
-        const otherPains = ['顎が痛い', '奥歯が痛い'];
-        const symptoms = ['吐き気', '嘔吐', '光が眩しい', '音過敏'];
-        const severities = ['軽度', '中程度', '重度'];
-        const impacts = ['支障なし', '少しある', '中程度', '大きい'];
+<!-- ===== TAB 3 ===== -->
+<div id="timeline" class="tab-content">
+    <div id="timelineDisplay">
+        <div class="card" style="text-align:center; color:#999; padding:30px;">まずは「発作開始」タブで記録してください。</div>
+    </div>
+    <div class="card" style="text-align:center;">
+        <button class="btn-secondary" onclick="openExportModal()">📥 データをエクスポート</button>
+        <button class="btn-secondary" onclick="clearAllSessions()" style="margin-top:10px; background:#ffebee; color:#c62828;">🗑️ 全ての記録を削除</button>
+    </div>
+</div>
+```
 
-        let currentSessionId = null;
+</div>
 
-        function updateTimeDisplay() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            
-            document.getElementById('timeDisplay').textContent = `現在時刻: ${hours}:${minutes}`;
-            
-            if (document.getElementById('initialDate').value === '') {
-                document.getElementById('initialDate').value = `${year}-${month}-${day}`;
-            }
-            if (document.getElementById('initialTime').value === '') {
-                document.getElementById('initialTime').value = `${hours}:${minutes}`;
-            }
-        }
+<div id="exportModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-title">📥 データをエクスポート</div>
+        <p style="font-size:13px; color:#666; margin-bottom:16px;">保存形式を選んでください</p>
+        <div class="modal-buttons">
+            <button class="modal-btn modal-btn-pdf" onclick="exportPDF()">📄 PDF で保存</button>
+            <button class="modal-btn modal-btn-csv" onclick="exportCSV()">📊 CSV で保存</button>
+            <button class="modal-btn modal-btn-both" onclick="exportBoth()">🔁 両方保存</button>
+            <button class="modal-btn modal-btn-cancel" onclick="closeExportModal()">キャンセル</button>
+        </div>
+    </div>
+</div>
 
-        updateTimeDisplay();
+<script>
+// ===== 定数 =====
+const painLocations = ['目の奥','こめかみ','眉間','おでこの奥','側頭部','頭全体'];
+const painTypes = ['ズキンズキン','ジンジン','ジーン'];
+const tensions = ['後頭部','首筋','肩','背中'];
+const otherPains = ['顎が痛い','奥歯が痛い'];
+const symptoms = ['吐き気','嘔吐','光が眩しい','音過敏'];
+const severities = ['軽度','中程度','重度'];
+const impacts = ['支障なし','少しある','中程度','大きい'];
+const bodyParts = ['目','おでこ','こめかみ','側頭部','後頭部','頭の付け根','首','肩','背中'];
+const treatmentEffects = ['効果あり','少し効果あり','効果なし','不明'];
 
-        function initializeUI() {
-            const painLocationsContainer = document.getElementById('painLocations');
-            painLocations.forEach(location => {
-                const div = document.createElement('div');
-                div.className = 'location-pain-group';
-                div.innerHTML = `<div class="location-label">${location}</div><div class="pain-type-buttons" data-location="${location}">${painTypes.map(type => `<button type="button" class="pain-btn" data-type="${type}" onclick="selectPainType(event, '${location}')">${type}</button>`).join('')}</div><button type="button" class="pain-clear-btn" onclick="clearPainType('${location}')">✕ リセット</button>`;
-                painLocationsContainer.appendChild(div);
+const treatmentList = [
+    {id:'lie_down',label:'横になる'},
+    {id:'sit',label:'座る'},
+    {id:'sleep',label:'寝る'},
+    {id:'cool',label:'冷やす',hasParts:true},
+    {id:'warm',label:'温める',hasParts:true},
+    {id:'bath',label:'入浴'},
+    {id:'stretch',label:'ストレッチ'},
+    {id:'hydrate',label:'水分補給'},
+    {id:'close_eyes',label:'目を閉じる'},
+    {id:'move',label:'身体を動かす'},
+    {id:'dark_room',label:'暗い部屋で休む'},
+    {id:'block_sound',label:'音を遮断する'},
+    {id:'caffeine',label:'カフェインを摂る'},
+    {id:'treatment_other',label:'その他',hasNote:true},
+];
+
+const triggerList = [
+    {id:'alcohol',label:'お酒',hasDetail:true,placeholder:'種類と量（例：ビール 350ml）'},
+    {id:'screen',label:'画面の長時間注視'},
+    {id:'posture_load',label:'同じ体勢で負荷'},
+    {id:'bad_posture',label:'姿勢が悪い状態で負荷'},
+    {id:'sitting_long',label:'長時間座りっぱなし'},
+    {id:'specific_food',label:'特定の食べ物',hasDetail:true,placeholder:'食べたもの（例：チョコ、チーズ）'},
+    {id:'sleep_change',label:'睡眠の変化',hasDetail:true,placeholder:'寝不足・寝すぎなど'},
+    {id:'weather_change',label:'天候・気圧の変化'},
+    {id:'strong_light',label:'強い光・フラッシュ'},
+    {id:'strong_smell',label:'強いにおい'},
+    {id:'visual_aura',label:'目の前に光が見えた'},
+    {id:'menstrual',label:'生理周期'},
+    {id:'skipped_meal',label:'食事を抜いた・空腹'},
+    {id:'stress',label:'ストレス・その解放直後'},
+    {id:'dehydration',label:'脱水・水分不足'},
+    {id:'neck_shoulder',label:'首・肩の強いこり'},
+    {id:'trigger_other',label:'その他',hasDetail:true,placeholder:'詳細を入力'},
+];
+
+// ===== 状態 =====
+let currentSessionId = null;
+let weatherData = null;
+let activeTriggers = {};
+let activeTreatments = {};
+let pendingNewMeds = [];
+let pendingMedTracking = {};
+
+// ===== 初期化 =====
+function updateTimeDisplay() {
+    const now = new Date();
+    const hh = String(now.getHours()).padStart(2,'0');
+    const mm = String(now.getMinutes()).padStart(2,'0');
+    document.getElementById('timeDisplay').textContent = `現在時刻: ${hh}:${mm}`;
+    if (!document.getElementById('initialDate').value) {
+        const yyyy=now.getFullYear(), mo=String(now.getMonth()+1).padStart(2,'0'), dd=String(now.getDate()).padStart(2,'0');
+        document.getElementById('initialDate').value=`${yyyy}-${mo}-${dd}`;
+    }
+    if (!document.getElementById('initialTime').value) document.getElementById('initialTime').value=`${hh}:${mm}`;
+}
+updateTimeDisplay();
+
+function initializeUI() {
+    // Pain locations
+    const plc = document.getElementById('painLocations');
+    painLocations.forEach(loc => {
+        const d = document.createElement('div');
+        d.className = 'location-pain-group';
+        d.innerHTML = `<div class="location-label">${loc}</div>
+            <div class="pain-type-buttons" data-location="${loc}">
+                ${painTypes.map(t=>`<button type="button" class="pain-btn" data-type="${t}" onclick="selectPainType(event,'${loc}')">${t}</button>`).join('')}
+            </div>
+            <button type="button" class="pain-clear-btn" onclick="clearPainType('${loc}')">✕ リセット</button>`;
+        plc.appendChild(d);
+    });
+    // Severity
+    const sg = document.getElementById('severityGroup');
+    sg.innerHTML = `<div class="radio-item"><input type="radio" id="sev_none" name="severityGroup" value=""><label for="sev_none">選択なし</label></div>`;
+    severities.forEach((s,i)=> sg.innerHTML+=`<div class="radio-item"><input type="radio" id="sev_${i}" name="severityGroup" value="${s}"><label for="sev_${i}">${s}</label></div>`);
+    // Impact
+    const ig = document.getElementById('impactGroup');
+    impacts.forEach((s,i)=> ig.innerHTML+=`<div class="radio-item"><input type="radio" id="imp_${i}" name="impactGroup" value="${s}"><label for="imp_${i}">${s}</label></div>`);
+    // Checkboxes
+    [{id:'tensionGroup',opts:tensions},{id:'otherPainGroup',opts:otherPains},{id:'symptomGroup',opts:symptoms}].forEach(({id,opts})=>{
+        const g=document.getElementById(id);
+        opts.forEach((o,i)=> g.innerHTML+=`<div class="checkbox-item"><input type="checkbox" id="${id}_${i}" value="${o}"><label for="${id}_${i}">${o}</label></div>`);
+    });
+    // Events
+    document.querySelectorAll('input[type="radio"]').forEach(inp=>inp.addEventListener('change',function(){
+        document.querySelectorAll(`input[name="${this.name}"]`).forEach(i=>i.parentElement.classList.remove('checked'));
+        this.parentElement.classList.add('checked');
+    }));
+    document.querySelectorAll('input[type="checkbox"]').forEach(inp=>inp.addEventListener('change',function(){
+        this.parentElement.classList.toggle('checked',this.checked);
+    }));
+    renderTriggerGrid();
+    renderTreatmentGrid();
+}
+initializeUI();
+
+function selectPainType(e,loc){ e.preventDefault(); e.target.parentElement.querySelectorAll('.pain-btn').forEach(b=>b.classList.remove('selected')); e.target.classList.add('selected'); }
+function clearPainType(loc){ document.querySelectorAll(`[data-location="${loc}"] .pain-btn`).forEach(b=>b.classList.remove('selected')); }
+
+function switchTab(e,tab){
+    e.preventDefault();
+    document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el=>el.classList.remove('active'));
+    document.getElementById(tab).classList.add('active');
+    e.target.classList.add('active');
+    if(tab==='followup') updateFollowupForm();
+    if(tab==='timeline') updateTimeline();
+}
+
+// ===== 天候 =====
+async function fetchWeather(){
+    const btn=document.getElementById('weatherFetchBtn');
+    const status=document.getElementById('weatherStatus');
+    btn.disabled=true;
+    status.textContent='📍 位置情報を取得中...';
+    try{
+        const pos=await new Promise((res,rej)=>navigator.geolocation.getCurrentPosition(res,rej,{timeout:10000}));
+        status.textContent='🌐 天候データを取得中...';
+        const {latitude:lat,longitude:lon}=pos.coords;
+        const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,surface_pressure,weather_code`);
+        const data=await r.json();
+        const c=data.current;
+        weatherData={temp:Math.round(c.temperature_2m),humidity:c.relative_humidity_2m,pressure:Math.round(c.surface_pressure),condition:getWeatherDesc(c.weather_code),fetchedAt:new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'})};
+        renderWeatherCard();
+        status.textContent='';
+    }catch(e){
+        status.textContent='取得できませんでした。手動で入力してください。';
+        document.getElementById('weatherManual').style.display='block';
+        btn.disabled=false;
+        btn.textContent='🔄 再取得';
+    }
+}
+function getWeatherDesc(code){
+    if(code===0)return'快晴'; if(code<=3)return'晴れ〜曇り'; if(code<=48)return'霧';
+    if(code<=67)return'雨'; if(code<=77)return'雪'; if(code<=82)return'にわか雨'; return'雷雨';
+}
+function renderWeatherCard(){
+    if(!weatherData)return;
+    const card=document.getElementById('weatherCard');
+    card.style.display='block';
+    card.innerHTML=`<div class="weather-grid">
+        <div>🌡 気温：<span class="weather-val">${weatherData.temp}°C</span></div>
+        <div>💧 湿度：<span class="weather-val">${weatherData.humidity}%</span></div>
+        <div>📊 気圧：<span class="weather-val">${weatherData.pressure} hPa</span></div>
+        <div>🌤 天候：<span class="weather-val">${weatherData.condition}</span></div>
+    </div><div style="font-size:11px;color:#888;margin-top:6px;">${weatherData.fetchedAt} 取得</div>`;
+    document.getElementById('weatherFetchBtn').textContent='🔄 再取得';
+    document.getElementById('weatherFetchBtn').disabled=false;
+}
+
+// ===== トリガー =====
+function renderTriggerGrid(){
+    const grid=document.getElementById('triggerGrid'); if(!grid)return;
+    grid.innerHTML='';
+    triggerList.forEach(t=>{
+        const chip=document.createElement('div');
+        chip.className='chip'+(activeTriggers.hasOwnProperty(t.id)?' active':'');
+        chip.textContent=t.label;
+        chip.onclick=()=>toggleTrigger(t);
+        grid.appendChild(chip);
+    });
+    renderTriggerDetails();
+}
+function toggleTrigger(t){
+    if(activeTriggers.hasOwnProperty(t.id)) delete activeTriggers[t.id];
+    else activeTriggers[t.id]={detail:''};
+    renderTriggerGrid();
+}
+function renderTriggerDetails(){
+    const c=document.getElementById('triggerDetails'); if(!c)return;
+    c.innerHTML='';
+    triggerList.filter(t=>t.hasDetail&&activeTriggers.hasOwnProperty(t.id)).forEach(t=>{
+        const div=document.createElement('div');
+        div.className='chip-detail';
+        div.innerHTML=`<div style="font-size:12px;font-weight:600;color:#5b7fd8;margin-bottom:6px;">${t.label}の詳細</div>
+            <input type="text" id="trigger_detail_${t.id}" placeholder="${t.placeholder}" value="${activeTriggers[t.id]?.detail||''}" oninput="if(activeTriggers['${t.id}'])activeTriggers['${t.id}'].detail=this.value" style="margin-bottom:0;">`;
+        c.appendChild(div);
+    });
+}
+
+// ===== 対処法 =====
+function renderTreatmentGrid(){
+    const grid=document.getElementById('treatmentGrid'); if(!grid)return;
+    grid.innerHTML='';
+    treatmentList.forEach(t=>{
+        const chip=document.createElement('div');
+        chip.className='chip'+(activeTreatments.hasOwnProperty(t.id)?' active':'');
+        chip.textContent=t.label;
+        chip.onclick=()=>toggleTreatment(t);
+        grid.appendChild(chip);
+    });
+    renderTreatmentDetails();
+}
+function toggleTreatment(t){
+    if(activeTreatments.hasOwnProperty(t.id)) delete activeTreatments[t.id];
+    else activeTreatments[t.id]={label:t.label,parts:[],effect:'',note:''};
+    renderTreatmentGrid();
+}
+function renderTreatmentDetails(){
+    const c=document.getElementById('treatmentDetails'); if(!c)return;
+    c.innerHTML='';
+    Object.entries(activeTreatments).forEach(([id,state])=>{
+        const t=treatmentList.find(x=>x.id===id); if(!t)return;
+        const div=document.createElement('div');
+        div.className='chip-detail';
+        let html=`<div style="font-size:12px;font-weight:600;color:#2e7d42;margin-bottom:8px;">🩹 ${t.label}</div>`;
+        if(t.hasParts){
+            html+=`<div style="font-size:12px;color:#555;margin-bottom:6px;">部位（複数選択可）</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;">`;
+            bodyParts.forEach(p=>{
+                const a=state.parts.includes(p);
+                html+=`<span onclick="toggleTreatmentPart('${id}','${p}')" style="padding:5px 10px;border-radius:20px;font-size:12px;cursor:pointer;border:1.5px solid ${a?'#5b7fd8':'#e8ecf1'};background:${a?'#e8f0ff':'#f8f9fc'};color:${a?'#5b7fd8':'#555'};font-weight:${a?'600':'400'};">${p}</span>`;
             });
+            html+=`</div>`;
+        }
+        html+=`<div style="font-size:12px;color:#555;margin-bottom:6px;">効果</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;">`;
+        treatmentEffects.forEach(ef=>{
+            const a=state.effect===ef;
+            html+=`<span onclick="setTreatmentEffect('${id}','${ef}')" style="padding:5px 10px;border-radius:20px;font-size:12px;cursor:pointer;border:1.5px solid ${a?'#2e7d42':'#e8ecf1'};background:${a?'#e8f5e9':'#f8f9fc'};color:${a?'#2e7d42':'#555'};font-weight:${a?'600':'400'};">${ef}</span>`;
+        });
+        html+=`</div><input type="text" placeholder="メモ（任意）" value="${state.note}" oninput="if(activeTreatments['${id}'])activeTreatments['${id}'].note=this.value" style="margin-bottom:0;">`;
+        div.innerHTML=html;
+        c.appendChild(div);
+    });
+}
+function toggleTreatmentPart(id,part){
+    if(!activeTreatments[id])return;
+    const idx=activeTreatments[id].parts.indexOf(part);
+    if(idx>=0)activeTreatments[id].parts.splice(idx,1); else activeTreatments[id].parts.push(part);
+    renderTreatmentDetails();
+}
+function setTreatmentEffect(id,effect){
+    if(activeTreatments[id])activeTreatments[id].effect=effect;
+    renderTreatmentDetails();
+}
 
-            ['severityGroup', 'impactGroup'].forEach(groupId => {
-                const group = document.getElementById(groupId);
-                const options = groupId === 'severityGroup' ? severities : impacts;
-                group.innerHTML = `<div class="radio-item"><input type="radio" id="${groupId}_none" name="${groupId}" value=""><label for="${groupId}_none">選択なし</label></div>`;
-                options.forEach((opt, idx) => {
-                    group.innerHTML += `<div class="radio-item"><input type="radio" id="${groupId}_${idx}" name="${groupId}" value="${opt}"><label for="${groupId}_${idx}">${opt}</label></div>`;
+// ===== 発作開始 =====
+function startTracking(){
+    const initialDate=document.getElementById('initialDate').value;
+    const initialTime=document.getElementById('initialTime').value;
+    if(!initialDate||!initialTime){alert('日付と時刻を入力してください');return;}
+    const sessionId=`session_${initialDate.replace(/-/g,'')}${initialTime.replace(/:/g,'')}`;
+    currentSessionId=sessionId;
+
+    const painData={};
+    painLocations.forEach(loc=>{
+        const sel=document.querySelector(`[data-location="${loc}"] .pain-btn.selected`);
+        if(sel)painData[loc]=sel.dataset.type;
+    });
+
+    const triggerLabels=Object.keys(activeTriggers).map(id=>triggerList.find(x=>x.id===id)?.label||id);
+    const triggerDetailMap={};
+    Object.entries(activeTriggers).forEach(([id,v])=>{if(v.detail)triggerDetailMap[id]=v.detail;});
+
+    let wData=weatherData;
+    if(!wData){
+        const mp=document.getElementById('manualPressure').value;
+        const mc=document.getElementById('manualCondition').value;
+        if(mp||mc)wData={pressure:mp?Number(mp):null,condition:mc||null,temp:null,humidity:null,fetchedAt:'manual'};
+    }
+
+    const session={
+        id:sessionId,
+        startTime:`${initialDate} ${initialTime}`,
+        severity:document.querySelector('input[name="severityGroup"]:checked')?.value||'',
+        painData,
+        tensions:Array.from(document.querySelectorAll('[id^="tensionGroup_"]:checked')).map(c=>c.value),
+        otherPains:Array.from(document.querySelectorAll('[id^="otherPainGroup_"]:checked')).map(c=>c.value),
+        symptoms:Array.from(document.querySelectorAll('[id^="symptomGroup_"]:checked')).map(c=>c.value),
+        impact:document.querySelector('input[name="impactGroup"]:checked')?.value||'',
+        weather:wData,
+        triggers:triggerLabels,
+        triggerDetails:triggerDetailMap,
+        triggerFreeNote:document.getElementById('triggerFreeNote').value,
+        freeNote:document.getElementById('freeNote').value,
+        followups:[]
+    };
+    localStorage.setItem(sessionId,JSON.stringify(session));
+    showSuccessMessage();
+    activeTriggers={};weatherData=null;
+    document.getElementById('weatherCard').style.display='none';
+    document.getElementById('weatherStatus').textContent='';
+    document.getElementById('weatherFetchBtn').textContent='📡 現在の天候・気圧を取得';
+    document.getElementById('weatherManual').style.display='none';
+    renderTriggerGrid();
+    setTimeout(()=>document.querySelectorAll('.tab-btn')[1].click(),800);
+}
+
+// ===== localStorage =====
+function getAllSessions(){
+    const sessions=[];
+    for(let i=0;i<localStorage.length;i++){
+        const key=localStorage.key(i);
+        if(key&&key.startsWith('session_')){try{sessions.push(JSON.parse(localStorage.getItem(key)));}catch(e){}}
+    }
+    return sessions.sort((a,b)=>a.startTime.localeCompare(b.startTime));
+}
+
+// ===== 追加記録フォーム =====
+function updateFollowupForm(){
+    const sessions=getAllSessions();
+    if(!sessions.length){document.getElementById('noSessions').style.display='block';document.getElementById('followupForm').style.display='none';return;}
+    document.getElementById('noSessions').style.display='none';
+    document.getElementById('followupForm').style.display='block';
+    const sel=document.getElementById('sessionSelector');
+    sel.innerHTML='<option value="">-- 発作を選択 --</option>';
+    sessions.forEach(s=>{
+        const opt=document.createElement('option');
+        opt.value=s.id;
+        opt.textContent=`${s.startTime}（程度: ${s.severity||'なし'}）`;
+        sel.appendChild(opt);
+    });
+    activeTreatments={};
+    renderTreatmentGrid();
+}
+
+function updateFollowupSession(){
+    const sessionId=document.getElementById('sessionSelector').value;
+    if(!sessionId){document.getElementById('sessionInfo').style.display='none';document.getElementById('medTrackingSection').style.display='none';return;}
+    currentSessionId=sessionId;
+    pendingNewMeds=[];pendingMedTracking={};activeTreatments={};
+    renderNewMedEntries();renderTreatmentGrid();
+    const session=JSON.parse(localStorage.getItem(sessionId));
+    document.getElementById('sessionInfo').style.display='block';
+    document.getElementById('sessionStartDisplay').textContent=session.startTime;
+    // 日付を自動セット（発作開始日をデフォルトに）
+    const today=new Date();
+    const yyyy=today.getFullYear(),mo=String(today.getMonth()+1).padStart(2,'0'),dd=String(today.getDate()).padStart(2,'0');
+    document.getElementById('followupDate').value=`${yyyy}-${mo}-${dd}`;
+    const allMeds=collectAllMedsInSession(session);
+    if(allMeds.length){document.getElementById('medTrackingSection').style.display='block';renderMedTrackingCards(allMeds);}
+    else document.getElementById('medTrackingSection').style.display='none';
+}
+
+function collectAllMedsInSession(session){
+    const seen={},result=[];
+    (session.followups||[]).forEach(fu=>{
+        const meds=fu.newMedications||fu.medications||(fu.medication?[fu.medication]:[]);
+        meds.forEach(m=>{
+            if(!m||!m.name||m.name==='服薬なし')return;
+            const key=`${m.name}_${m.time||''}`;
+            if(!seen[key]){seen[key]=true;result.push({name:m.name,takenAt:m.time||'',key});}
+        });
+    });
+    return result;
+}
+
+function calcElapsed(takenAt, currentTime, takenDate, currentDate){
+    if(!takenAt||!currentTime)return null;
+    try{
+        // 日付情報がある場合はDateオブジェクトで正確に計算
+        if(takenDate&&currentDate){
+            const taken=new Date(`${takenDate}T${takenAt}`);
+            const current=new Date(`${currentDate}T${currentTime}`);
+            const el=Math.round((current-taken)/60000);
+            return el>=0?el:null;
+        }
+        // 日付なしの場合は時刻のみで計算（跨ぎ対応）
+        const [mh,mm]=takenAt.split(':').map(Number);
+        const [ch,cm]=currentTime.split(':').map(Number);
+        let el=(ch*60+cm)-(mh*60+mm);
+        if(el<0)el+=1440;
+        return el;
+    }catch(e){return null;}
+}
+
+function renderMedTrackingCards(meds){
+    const container=document.getElementById('medTrackingCards');
+    container.innerHTML='';
+    meds.forEach(m=>{
+        const isActive=pendingMedTracking.hasOwnProperty(m.key);
+        const state=pendingMedTracking[m.key]||{};
+        // 観察時刻: state.observedAt があればそれ、なければ followupTime
+        const obsTime=state.observedAt||document.getElementById('followupTime').value||'';
+        const elapsed=m.takenAt&&obsTime?calcElapsed(m.takenAt,obsTime):null;
+        const div=document.createElement('div');
+        div.className='med-track-card';
+        div.id=`mtcard_${m.key}`;
+        let html=`<div class="med-track-card-header">
+            <div>
+                <div style="font-size:13px;font-weight:700;color:#5b4f8a;">💊 ${m.name}</div>
+                ${m.takenAt?`<div style="font-size:11px;color:#888;margin-top:2px;">服用：${m.takenAt}</div>`:''}
+            </div>
+            <button onclick="toggleMedTracking('${m.key}','${m.name}','${m.takenAt}','${m.takenDate||''}')" style="background:${isActive?'#f5e6ff':'#e8f0ff'};color:${isActive?'#7b3db8':'#5b7fd8'};border:1.5px solid ${isActive?'#c0a0f0':'#b3c8f5'};border-radius:6px;padding:6px 10px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Noto Sans JP',sans-serif;white-space:nowrap;">${isActive?'▲ 閉じる':'📝 経過を記録'}</button>
+        </div>`;
+        if(isActive){
+            const trackEffects=['効いた◎','やや効いた△','効かなかった×','変化なし'];
+            const effectChips=trackEffects.map(ef=>{
+                const a=state.effect===ef;
+                return`<span onclick="setMedTrackEffect('${m.key}','${ef}')" style="padding:5px 10px;border-radius:20px;font-size:12px;cursor:pointer;border:1.5px solid ${a?'#7b3db8':'#e8ecf1'};background:${a?'#f0e8ff':'#f8f9fc'};color:${a?'#7b3db8':'#555'};font-weight:${a?'600':'400'};">${ef}</span>`;
+            }).join('');
+            html+=`<div class="med-track-detail">
+                <div style="font-size:12px;font-weight:600;color:#555;margin-bottom:6px;">この時点の時刻</div>
+                <input type="time" id="mtobs_${m.key}" value="${obsTime}" oninput="updateMedTrackObs('${m.key}','${m.takenAt}','${m.takenDate||''}',this.value)" style="margin-bottom:8px;">
+                ${elapsed!==null?`<div class="elapsed-info">⏱ 服用（${m.takenAt}）から ${elapsed} 分経過</div>`:''}
+                <div style="font-size:12px;font-weight:600;color:#555;margin-bottom:6px;">この時点での効果</div>
+                <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;">${effectChips}</div>
+                <input type="text" id="mttrack_note_${m.key}" placeholder="メモ（任意）" value="${state.note||''}" oninput="if(pendingMedTracking['${m.key}'])pendingMedTracking['${m.key}'].note=this.value" style="margin-bottom:0;">
+            </div>`;
+        }
+        div.innerHTML=html;
+        container.appendChild(div);
+    });
+}
+
+function updateMedTrackObs(key, takenAt, takenDate, obsTime){
+    if(!pendingMedTracking[key])return;
+    const cd=document.getElementById('followupDate').value;
+    const elapsed=takenAt&&obsTime?calcElapsed(takenAt,obsTime,takenDate||'',cd):null;
+    pendingMedTracking[key].observedAt=obsTime;
+    pendingMedTracking[key].observedDate=cd;
+    pendingMedTracking[key].elapsedMin=elapsed;
+    const session=JSON.parse(localStorage.getItem(currentSessionId));
+    renderMedTrackingCards(collectAllMedsInSession(session));
+}
+
+function toggleMedTracking(key,name,takenAt,takenDate){
+    if(pendingMedTracking.hasOwnProperty(key)){delete pendingMedTracking[key];}
+    else{
+        const ct=document.getElementById('followupTime').value;
+        const cd=document.getElementById('followupDate').value;
+        const elapsed=takenAt&&ct?calcElapsed(takenAt,ct,takenDate||'',cd):null;
+        pendingMedTracking[key]={medRef:key,name,takenAt,takenDate:takenDate||'',observedAt:ct,observedDate:cd,elapsedMin:elapsed,effect:'',note:''};
+    }
+    const session=JSON.parse(localStorage.getItem(currentSessionId));
+    renderMedTrackingCards(collectAllMedsInSession(session));
+}
+
+function setMedTrackEffect(key,effect){
+    if(pendingMedTracking[key])pendingMedTracking[key].effect=effect;
+    const session=JSON.parse(localStorage.getItem(currentSessionId));
+    renderMedTrackingCards(collectAllMedsInSession(session));
+}
+
+function updateAllElapsed(){
+    if(!currentSessionId)return;
+    const session=JSON.parse(localStorage.getItem(currentSessionId));
+    const allMeds=collectAllMedsInSession(session);
+    if(allMeds.length)renderMedTrackingCards(allMeds);
+    // Update pending tracking elapsed times
+    Object.keys(pendingMedTracking).forEach(key=>{
+        const ct=document.getElementById('followupTime').value;
+        const takenAt=pendingMedTracking[key].takenAt;
+        pendingMedTracking[key].observedAt=ct;
+        pendingMedTracking[key].elapsedMin=takenAt?calcElapsed(takenAt,ct):null;
+    });
+    updateNewMedElapsed();
+}
+
+// ===== 新しい服薬 =====
+function toggleMedOtherNew(){
+    const sel=document.getElementById('medNameSel').value;
+    document.getElementById('medNameOtherNew').style.display=sel==='__other__'?'block':'none';
+    updateNewMedElapsed();
+}
+function updateNewMedElapsed(){
+    const mt=document.getElementById('medTimeSel').value;
+    const ct=document.getElementById('followupTime').value;
+    const cd=document.getElementById('followupDate').value;
+    const disp=document.getElementById('newMedElapsedDisplay');
+    if(mt&&ct){
+        const takenDate=mt>ct?getPrevDate(cd):cd;
+        const el=calcElapsed(mt,ct,takenDate,cd);
+        if(el!=null){disp.textContent=`服用から ${el} 分経過`;disp.style.display='block';}
+        else disp.style.display='none';
+    } else disp.style.display='none';
+}
+function getNewMedName(){
+    const sel=document.getElementById('medNameSel').value;
+    if(sel==='__other__')return document.getElementById('medNameOtherNew').value;
+    return sel;
+}
+function addNewMedEntry(){
+    const name=getNewMedName(); if(!name){alert('薬を選択してください');return;}
+    const mt=document.getElementById('medTimeSel').value;
+    const ct=document.getElementById('followupTime').value;
+    const cd=document.getElementById('followupDate').value;
+    // 服薬時刻の日付：追加記録日付と同じとみなす（深夜跨ぎは服薬が前日の場合も）
+    const takenDate=mt&&ct&&cd&&(mt>ct)?getPrevDate(cd):cd;
+    const elapsed=mt&&ct?calcElapsed(mt,ct,takenDate,cd):null;
+    pendingNewMeds.push({name,time:mt,takenDate,observedAt:ct,observedDate:cd,elapsedMin:elapsed,effect:'',onset:''});
+    renderNewMedEntries();
+    document.getElementById('medNameSel').value='';
+    document.getElementById('medNameOtherNew').style.display='none';
+    document.getElementById('medNameOtherNew').value='';
+    document.getElementById('medTimeSel').value='';
+    document.getElementById('newMedElapsedDisplay').style.display='none';
+}
+
+function getPrevDate(dateStr){
+    if(!dateStr)return dateStr;
+    const d=new Date(dateStr);
+    d.setDate(d.getDate()-1);
+    return d.toISOString().split('T')[0];
+}
+function removeNewMedEntry(idx){pendingNewMeds.splice(idx,1);renderNewMedEntries();}
+function setNewMedProp(idx,prop,val){
+    if(pendingNewMeds[idx][prop]===val) pendingNewMeds[idx][prop]='';
+    else pendingNewMeds[idx][prop]=val;
+    renderNewMedEntries();
+}
+const effectOpts=['服薬開始','効いた◎','やや効いた△','効かなかった×'];
+function renderNewMedEntries(){
+    const c=document.getElementById('newMedEntriesDisplay');
+    if(!pendingNewMeds.length){c.innerHTML='';return;}
+    c.innerHTML=pendingNewMeds.map((m,i)=>{
+        const effectChips=effectOpts.map(ef=>{
+            const a=m.effect===ef;
+            return`<span onclick="setNewMedProp(${i},'effect','${ef}')" style="padding:4px 9px;border-radius:20px;font-size:11px;cursor:pointer;border:1.5px solid ${a?'#5b4f8a':'#d0bfff'};background:${a?'#f0e8ff':'#f8f9fc'};color:${a?'#5b4f8a':'#777'};font-weight:${a?'700':'400'};">${ef}</span>`;
+        }).join('');
+        return`<div style="background:#e8f0ff;border:1.5px solid #b3c8f5;border-radius:8px;padding:12px;margin-bottom:8px;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+                <strong style="color:#5b7fd8;font-size:13px;">💊 ${m.name}</strong>
+                <button onclick="removeNewMedEntry(${i})" style="background:#ffebee;color:#c62828;border:none;border-radius:6px;padding:3px 8px;font-size:11px;cursor:pointer;font-family:'Noto Sans JP',sans-serif;flex-shrink:0;">削除</button>
+            </div>
+            ${m.time?`<div style="font-size:12px;color:#555;margin-bottom:8px;">服用：${m.time}${m.elapsedMin!=null?'　→ 服用から '+m.elapsedMin+'分経過':''}</div>`:''}
+            <div style="font-size:11px;font-weight:600;color:#555;margin-bottom:4px;">効き目</div>
+            <div style="display:flex;flex-wrap:wrap;gap:5px;">${effectChips}</div>
+        </div>`;
+    }).join('');
+}
+
+// ===== 追加記録保存 =====
+function addFollowup(){
+    if(!currentSessionId)return;
+    const session=JSON.parse(localStorage.getItem(currentSessionId));
+    const treatmentsData=Object.values(activeTreatments).map(t=>({...t}));
+    const medTrackingData=Object.values(pendingMedTracking).filter(mt=>mt.effect||mt.note||mt.elapsedMin!=null);
+    const followup={
+        date:document.getElementById('followupDate').value,
+        time:document.getElementById('followupTime').value,
+        trend:document.querySelector('input[name="followupTrend"]:checked')?.value||'',
+        note:document.getElementById('followupNote').value,
+        impact:document.querySelector('input[name="followupImpact"]:checked')?.value||'',
+        newMedications:pendingNewMeds.filter(m=>m.name!=='服薬なし'),
+        medTracking:medTrackingData,
+        treatments:treatmentsData
+    };
+    session.followups.push(followup);
+    localStorage.setItem(currentSessionId,JSON.stringify(session));
+    pendingNewMeds=[];pendingMedTracking={};activeTreatments={};
+    renderNewMedEntries();renderTreatmentGrid();
+    document.getElementById('followupNote').value='';
+    document.querySelectorAll('input[name="followupTrend"]').forEach(r=>{r.checked=false;r.parentElement.classList.remove('checked');});
+    document.querySelectorAll('input[name="followupImpact"]').forEach(r=>{r.checked=false;r.parentElement.classList.remove('checked');});
+    showSuccessMessage();
+    const allMeds=collectAllMedsInSession(session);
+    if(allMeds.length){document.getElementById('medTrackingSection').style.display='block';renderMedTrackingCards(allMeds);}
+}
+
+// ===== タイムライン =====
+function calcElapsedStr(startTimeStr, fuTime, fuDate){
+    try{
+        const [startDate, startTime]=startTimeStr.split(' ');
+        if(fuDate&&startDate){
+            const start=new Date(`${startDate}T${startTime}`);
+            const end=new Date(`${fuDate}T${fuTime}`);
+            const el=Math.round((end-start)/60000);
+            if(el<0)return '';
+            return el>=60?`${Math.floor(el/60)}時間${el%60>0?el%60+'分':''}`:`${el}分`;
+        }
+        // フォールバック：時刻のみ
+        const [sh,sm]=startTime.split(':').map(Number);
+        const [ch,cm]=fuTime.split(':').map(Number);
+        let el=(ch*60+cm)-(sh*60+sm);
+        if(el<0)el+=1440;
+        return el>=60?`${Math.floor(el/60)}時間${el%60>0?el%60+'分':''}`:`${el}分`;
+    }catch(e){return'';}
+}
+
+function updateTimeline(){
+    const sessions=getAllSessions();
+    if(!sessions.length){document.getElementById('timelineDisplay').innerHTML=`<div class="card" style="text-align:center;color:#999;padding:30px;">まずは「発作開始」タブで記録してください。</div>`;return;}
+    let html='';
+    sessions.forEach(session=>{
+        const sc=session.severity==='重度'?'severe':session.severity==='中程度'?'moderate':session.severity==='軽度'?'mild':'none';
+        const sc2={severe:'#ef5350',moderate:'#ff9800',mild:'#4caf50',none:'#9e9e9e'}[sc];
+        const painStr=Object.entries(session.painData||{}).map(([l,t])=>`${l}(${t})`).join('・')||'';
+        html+=`<div class="session-card severity-${sc}">`;
+        html+=`<div class="session-card-header">`;
+        html+=`<div style="font-size:15px;font-weight:700;color:#222;">📍 ${session.startTime}</div>`;
+        html+=`<div style="margin-top:6px;">`;
+        if(session.severity)html+=`<span class="session-tag" style="color:${sc2};border-color:${sc2}40;">${session.severity}</span>`;
+        if(session.weather?.pressure)html+=`<span class="session-tag" style="color:#2c5f8a;border-color:#b3d9f7;">📊 ${session.weather.pressure}hPa ${session.weather.condition||''}</span>`;
+        if(session.weather?.temp!=null)html+=`<span class="session-tag" style="color:#555;">🌡 ${session.weather.temp}°C</span>`;
+        html+=`</div>`;
+        if(painStr)html+=`<div class="session-detail">🎯 <strong>痛み：</strong>${painStr}</div>`;
+        if(session.tensions?.length)html+=`<div class="session-detail">💪 <strong>筋緊張：</strong>${session.tensions.join('・')}</div>`;
+        if(session.symptoms?.length)html+=`<div class="session-detail">⚡ <strong>症状：</strong>${session.symptoms.join('・')}</div>`;
+        if(session.impact)html+=`<div class="session-detail">🔴 <strong>支障度：</strong>${session.impact}</div>`;
+        if(session.triggers?.length)html+=`<div class="session-detail">🔍 <strong>トリガー：</strong>${session.triggers.join(' / ')}</div>`;
+        const tdEntries=Object.entries(session.triggerDetails||{}).map(([k,v])=>{const t=triggerList.find(x=>x.id===k);return t?`${t.label}：${v}`:v;});
+        if(tdEntries.length)html+=`<div class="session-detail" style="padding-left:14px;color:#666;">└ ${tdEntries.join('　')}</div>`;
+        if(session.triggerFreeNote)html+=`<div class="session-detail">🔍 <strong>トリガーメモ：</strong>${session.triggerFreeNote}</div>`;
+        if(session.freeNote)html+=`<div class="session-detail">📝 ${session.freeNote}</div>`;
+        html+=`</div>`;
+        if(session.followups?.length){
+            session.followups.forEach(fu=>{
+                const elStr=fu.time?calcElapsedStr(session.startTime,fu.time,fu.date):'';
+                const ti=fu.trend?.includes('下がって')?'↓':fu.trend?.includes('上がって')?'↑':fu.trend?'→':'';
+                const tc=ti==='↓'?'#4caf50':ti==='↑'?'#ef5350':'#888';
+                html+=`<div class="followup-entry">`;
+                html+=`<div class="followup-header">`;
+                if(elStr)html+=`<span class="elapsed-badge">+${elStr}</span>`;
+                const sessionDate=session.startTime.split(' ')[0];
+                const fuDateLabel=fu.date&&fu.date!==sessionDate?` (${fu.date})`:'';
+                html+=`<span style="font-weight:700;font-size:13px;color:#333;">${fu.time}${fuDateLabel}</span>`;
+                if(ti)html+=`<span style="color:${tc};font-size:14px;font-weight:700;">${ti} ${fu.trend}</span>`;
+                html+=`</div>`;
+                if(fu.impact)html+=`<div class="fu-row">🔴 <strong>支障度：</strong>${fu.impact}</div>`;
+                if(fu.note)html+=`<div class="fu-row fu-note">📝 ${fu.note}</div>`;
+                const newMeds=fu.newMedications||fu.medications||(fu.medication?[fu.medication]:[]);
+                newMeds.forEach(m=>{
+                    if(!m||!m.name||m.name==='服薬なし')return;
+                    let line=`<strong>${m.name}</strong>`;
+                    if(m.time)line+=`　服用：${m.time}`;
+                    if(m.elapsedMin!=null)line+=`（+${m.elapsedMin}分）`;
+                    if(m.effect)line+=`　${m.effect}`;
+                    if(m.onset)line+=`　効きはじめ：${m.onset}`;
+                    html+=`<div class="fu-row fu-med">💊 ${line}</div>`;
                 });
-            });
-
-            [{ id: 'tensionGroup', options: tensions }, { id: 'otherPainGroup', options: otherPains }, { id: 'symptomGroup', options: symptoms }].forEach(({ id, options }) => {
-                const group = document.getElementById(id);
-                options.forEach((opt, idx) => {
-                    group.innerHTML += `<div class="checkbox-item"><input type="checkbox" id="${id}_${idx}" value="${opt}"><label for="${id}_${idx}">${opt}</label></div>`;
+                (fu.medTracking||[]).forEach(mt=>{
+                    if(!mt)return;
+                    let line=`<strong>${mt.name||mt.medRef}</strong>　追跡`;
+                    if(mt.takenAt)line+=`（服用：${mt.takenAt}）`;
+                    if(mt.elapsedMin!=null)line+=`　+${mt.elapsedMin}分`;
+                    if(mt.effect)line+=`　→ ${mt.effect}`;
+                    if(mt.note)line+=`　${mt.note}`;
+                    html+=`<div class="fu-row fu-med-track">🔍 ${line}</div>`;
                 });
-            });
-
-            document.querySelectorAll('input[type="radio"]').forEach(input => {
-                input.addEventListener('change', function() {
-                    document.querySelectorAll(`input[name="${this.name}"]`).forEach(i => i.parentElement.classList.remove('checked'));
-                    this.parentElement.classList.add('checked');
+                (fu.treatments||[]).forEach(t=>{
+                    if(!t)return;
+                    let line=`<strong>${t.label||t.name||''}</strong>`;
+                    if(t.parts?.length)line+=`（${t.parts.join('・')}）`;
+                    if(t.effect)line+=`　→ ${t.effect}`;
+                    if(t.note)line+=`　${t.note}`;
+                    html+=`<div class="fu-row fu-treatment">🩹 ${line}</div>`;
                 });
-            });
-
-            document.querySelectorAll('input[type="checkbox"]').forEach(input => {
-                input.addEventListener('change', function() {
-                    this.parentElement.classList.toggle('checked', this.checked);
-                });
+                html+=`</div>`;
             });
         }
+        html+=`</div>`;
+    });
+    document.getElementById('timelineDisplay').innerHTML=html;
+}
 
-        initializeUI();
+// ===== UI =====
+function showSuccessMessage(){
+    const m=document.getElementById('successMessage');
+    m.classList.add('show');
+    setTimeout(()=>m.classList.remove('show'),2000);
+}
+function openExportModal(){document.getElementById('exportModal').classList.add('show');}
+function closeExportModal(){document.getElementById('exportModal').classList.remove('show');}
 
-        function selectPainType(event, location) {
-            event.preventDefault();
-            const btn = event.target;
-            const buttons = btn.parentElement.querySelectorAll('.pain-btn');
-            buttons.forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-        }
-
-        function clearPainType(location) {
-            document.querySelectorAll(`[data-location="${location}"] .pain-btn`).forEach(b => b.classList.remove('selected'));
-        }
-
-        function switchTab(event, tabName) {
-            event.preventDefault();
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
-            if (tabName === 'followup') updateFollowupForm();
-            if (tabName === 'timeline') updateTimeline();
-        }
-
-        function startTracking() {
-            const initialDate = document.getElementById('initialDate').value;
-            const initialTime = document.getElementById('initialTime').value;
-            const sessionId = `session_${initialDate.replace(/-/g, '')}_${initialTime.replace(/:/g, '')}`;
-            currentSessionId = sessionId;
-
-            const painData = {};
-            painLocations.forEach(location => {
-                const selected = document.querySelector(`[data-location="${location}"] .pain-btn.selected`);
-                if (selected) painData[location] = selected.dataset.type;
-            });
-
-            const session = {
-                id: sessionId,
-                startTime: `${initialDate} ${initialTime}`,
-                severity: document.querySelector('input[name="severityGroup"]:checked')?.value || '',
-                painData,
-                tensions: Array.from(document.querySelectorAll('input[id^="tensionGroup_"]:checked')).map(cb => cb.value),
-                otherPains: Array.from(document.querySelectorAll('input[id^="otherPainGroup_"]:checked')).map(cb => cb.value),
-                symptoms: Array.from(document.querySelectorAll('input[id^="symptomGroup_"]:checked')).map(cb => cb.value),
-                impact: document.querySelector('input[name="impactGroup"]:checked')?.value || '',
-                freeNote: document.getElementById('freeNote').value,
-                followups: []
-            };
-
-            localStorage.setItem(sessionId, JSON.stringify(session));
-            showSuccessMessage();
-            setTimeout(() => document.querySelectorAll('.tab-btn')[1].click(), 800);
-        }
-
-        function getAllSessions() {
-            const sessions = [];
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key.startsWith('session_')) sessions.push(JSON.parse(localStorage.getItem(key)));
-            }
-            return sessions.sort((a, b) => a.startTime.localeCompare(b.startTime));
-        }
-
-        function updateFollowupForm() {
-            const sessions = getAllSessions();
-            if (sessions.length === 0) {
-                document.getElementById('noSessions').style.display = 'block';
-                document.getElementById('followupForm').style.display = 'none';
-                return;
-            }
-            document.getElementById('noSessions').style.display = 'none';
-            document.getElementById('followupForm').style.display = 'block';
-            const selector = document.getElementById('sessionSelector');
-            selector.innerHTML = '<option value="">-- 発作を選択 --</option>';
-            sessions.forEach(session => {
-                const option = document.createElement('option');
-                option.value = session.id;
-                option.textContent = `${session.startTime} (程度: ${session.severity || 'なし'})`;
-                selector.appendChild(option);
+// ===== PDF =====
+function exportPDF(){
+    const sessions=getAllSessions();
+    if(!sessions.length){alert('記録がありません');return;}
+    let bodyHtml='';
+    sessions.forEach(session=>{
+        const painStr=Object.entries(session.painData||{}).map(([l,t])=>`${l}(${t})`).join('、')||'なし';
+        const sc=session.severity==='重度'?'#ef5350':session.severity==='中程度'?'#ff9800':session.severity==='軽度'?'#4caf50':'#9e9e9e';
+        bodyHtml+=`<div class="s-block">
+            <div class="s-header" style="border-left:5px solid ${sc};">
+                <div class="s-title">📍 ${session.startTime}</div>
+                ${session.severity?`<span class="s-tag" style="color:${sc};">${session.severity}</span>`:''}
+                ${session.weather?.pressure?`<span class="s-tag">📊 ${session.weather.pressure}hPa ${session.weather.condition||''} ${session.weather.temp!=null?session.weather.temp+'°C':''}</span>`:''}
+            </div>
+            <div class="s-body">
+                <div class="f"><span class="l">痛みの場所と種類</span>${painStr}</div>
+                ${session.tensions?.length?`<div class="f"><span class="l">筋緊張</span>${session.tensions.join('、')}</div>`:''}
+                ${session.symptoms?.length?`<div class="f"><span class="l">症状</span>${session.symptoms.join('、')}</div>`:''}
+                <div class="f"><span class="l">生活支障度</span>${session.impact||'なし'}</div>
+                ${session.triggers?.length?`<div class="f"><span class="l">トリガー</span>${session.triggers.join('、')}</div>`:''}
+                ${session.triggerFreeNote?`<div class="f"><span class="l">トリガーメモ</span>${session.triggerFreeNote}</div>`:''}
+                ${session.freeNote?`<div class="f"><span class="l">メモ</span>${session.freeNote}</div>`:''}
+            </div>`;
+        if(session.followups?.length){
+            session.followups.forEach(fu=>{
+                const elStr=fu.time?calcElapsedStr(session.startTime,fu.time,fu.date):'';
+                bodyHtml+=`<div class="fu-block">
+                    <div class="fu-header">⏱️ ${fu.time}${elStr?' (+'+elStr+')':''}</div>
+                    ${fu.trend?`<div class="f"><span class="l">推移</span>${fu.trend}</div>`:''}
+                    ${fu.impact?`<div class="f"><span class="l">支障度</span>${fu.impact}</div>`:''}
+                    ${fu.note?`<div class="f"><span class="l">メモ</span>${fu.note}</div>`:''}`;
+                const nm=fu.newMedications||fu.medications||(fu.medication?[fu.medication]:[]);
+                nm.forEach(m=>{if(!m||!m.name||m.name==='服薬なし')return;bodyHtml+=`<div class="f"><span class="l">💊 服薬</span>${m.name}${m.time?'　'+m.time:''}${m.elapsedMin!=null?'　+'+m.elapsedMin+'分':''}${m.effect?'　'+m.effect:''}${m.onset?'　効きはじめ：'+m.onset:''}</div>`;});
+                (fu.medTracking||[]).forEach(mt=>{if(!mt)return;bodyHtml+=`<div class="f"><span class="l">🔍 服薬追跡</span>${mt.name||mt.medRef}${mt.elapsedMin!=null?'　+'+mt.elapsedMin+'分':''}${mt.effect?'　→ '+mt.effect:''}${mt.note?'　'+mt.note:''}</div>`;});
+                (fu.treatments||[]).forEach(t=>{if(!t)return;bodyHtml+=`<div class="f"><span class="l">🩹 対処</span>${t.label||t.name||''}${t.parts?.length?'（'+t.parts.join('・')+'）':''}${t.effect?'　→ '+t.effect:''}${t.note?'　'+t.note:''}</div>`;});
+                bodyHtml+=`</div>`;
             });
         }
+        bodyHtml+=`</div>`;
+    });
+    const pw=window.open('','_blank');
+    pw.document.write(`<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><style>
+    body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;padding:24px;color:#222;font-size:13px;line-height:1.7;}
+    h1{font-size:20px;color:#5b7fd8;margin-bottom:4px;}.gen{font-size:11px;color:#888;margin-bottom:24px;}
+    .s-block{border:1px solid #ddd;border-radius:8px;margin-bottom:22px;overflow:hidden;page-break-inside:avoid;}
+    .s-header{padding:12px 16px;background:#f8f9fc;}.s-title{font-size:15px;font-weight:bold;margin-bottom:6px;}
+    .s-tag{display:inline-block;font-size:11px;background:white;border:1px solid #ddd;border-radius:20px;padding:2px 8px;margin-right:6px;}
+    .s-body{padding:10px 16px;}.f{margin-bottom:4px;}.l{display:inline-block;font-weight:bold;min-width:130px;color:#555;}
+    .fu-block{border-top:1px dashed #ddd;padding:10px 16px;}.fu-header{font-weight:bold;color:#5b7fd8;margin-bottom:6px;}
+    @media print{@page{margin:15mm;}body{padding:0;}}
+    </style></head><body>
 
-        function updateFollowupSession() {
-            const sessionId = document.getElementById('sessionSelector').value;
-            if (!sessionId) {
-                document.getElementById('sessionInfo').style.display = 'none';
-                return;
-            }
-            currentSessionId = sessionId;
-            const session = JSON.parse(localStorage.getItem(sessionId));
-            document.getElementById('sessionInfo').style.display = 'block';
-            document.getElementById('sessionStartDisplay').textContent = session.startTime;
-        }
+```
+<h1>🏥 頭痛追跡記録</h1>
+<div class="gen">生成日時：${new Date().toLocaleString('ja-JP')}</div>
+${bodyHtml}</body></html>`);
+pw.document.close();pw.focus();
+setTimeout(()=>pw.print(),400);
+closeExportModal();
+```
 
-        function addFollowup() {
-            if (!currentSessionId) return;
-            const session = JSON.parse(localStorage.getItem(currentSessionId));
-            const followup = {
-                time: document.getElementById('followupTime').value,
-                trend: document.querySelector('input[name="followupTrend"]:checked')?.value || '',
-                note: document.getElementById('followupNote').value,
-                impact: document.querySelector('input[name="followupImpact"]:checked')?.value || '',
-                medication: document.getElementById('medName').value ? { 
-                    time: document.getElementById('medTime').value,
-                    name: document.getElementById('medName').value,
-                    effect: document.querySelector('input[name="followupEffect"]:checked')?.value || '',
-                    onset: document.querySelector('input[name="followupOnset"]:checked')?.value || ''
-                } : null
-            };
-            session.followups.push(followup);
-            localStorage.setItem(currentSessionId, JSON.stringify(session));
-            showSuccessMessage();
-        }
+}
 
-        function updateTimeline() {
-            const sessions = getAllSessions();
-            if (sessions.length === 0) {
-                document.getElementById('timelineDisplay').innerHTML = '<div style="color: #999; text-align: center; padding: 20px;">まずは「発作開始」タブで記録してください。</div>';
-                return;
-            }
-            let html = '<div class="timeline">';
-            sessions.forEach(session => {
-                html += `<div class="timeline-item"><div class="timeline-time">📍 ${session.startTime}</div><div class="timeline-content">`;
-                html += `程度: ${session.severity || 'なし'}<br>`;
-                html += `痛み: ${Object.entries(session.painData).map(([loc, type]) => `${loc}(${type})`).join(', ') || 'なし'}<br>`;
-                if (session.tensions.length) html += `筋緊張: ${session.tensions.join(', ')}<br>`;
-                if (session.otherPains.length) html += `その他: ${session.otherPains.join(', ')}<br>`;
-                if (session.symptoms.length) html += `症状: ${session.symptoms.join(', ')}<br>`;
-                html += `支障度: ${session.impact || 'なし'}<br>`;
-                if (session.freeNote) html += `メモ: ${session.freeNote}<br>`;
-                html += `</div></div>`;
-                if (session.followups?.length) {
-                    session.followups.forEach(fu => {
-                        html += `<div class="timeline-item"><div class="timeline-time">⏱️ ${fu.time}</div><div class="timeline-content">推移: ${fu.trend || 'なし'}<br>`;
-                        if (fu.note) html += `記録: ${fu.note}<br>`;
-                        if (fu.impact) html += `支障度: ${fu.impact}<br>`;
-                        if (fu.medication) html += `服薬: ${fu.medication.name}(${fu.medication.time}) - 効き目: ${fu.medication.effect || 'なし'}<br>`;
-                        html += `</div></div>`;
-                    });
-                }
-            });
-            html += '</div>';
-            document.getElementById('timelineDisplay').innerHTML = html;
-        }
+// ===== CSV =====
+function exportCSV(){
+const sessions=getAllSessions();
+if(!sessions.length){alert(‘記録がありません’);return;}
+const BOM=’\uFEFF’;
+const headers=[‘発作開始’,‘程度’,‘痛みの場所と種類’,‘筋緊張’,‘その他の痛み’,‘症状’,‘生活支障度’,
+‘気圧(hPa)’,‘天候’,‘気温’,‘湿度’,‘トリガー’,‘トリガー詳細’,‘トリガーメモ’,‘発作メモ’,
+‘記録時刻’,‘発作からの経過’,‘痛みの推移’,‘支障度変化’,‘追加メモ’,
+‘新規服薬名’,‘服薬時刻’,‘経過(分)’,‘効き目’,‘効きはじめ’,
+‘服薬追跡対象’,‘追跡経過(分)’,‘追跡効果’,‘追跡メモ’,
+‘対処法’,‘対処部位’,‘対処効果’,‘対処メモ’].join(’,’);
+let csv=BOM+headers+’\n’;
+const q=v=>`"${String(v==null?'':v).replace(/"/g,'""')}"`;
+sessions.forEach(session=>{
+const painStr=Object.entries(session.painData||{}).map(([l,t])=>`${l}:${t}`).join(’/’);
+const base=[q(session.startTime),q(session.severity||’’),q(painStr),
+q(session.tensions?.join(’/’)||’’),q(session.otherPains?.join(’/’)||’’),
+q(session.symptoms?.join(’/’)||’’),q(session.impact||’’),
+q(session.weather?.pressure??’’),q(session.weather?.condition||’’),
+q(session.weather?.temp??’’),q(session.weather?.humidity??’’),
+q(session.triggers?.join(’/’)||’’),
+q(Object.entries(session.triggerDetails||{}).map(([k,v])=>`${k}:${v}`).join(’/’)),
+q(session.triggerFreeNote||’’),q(session.freeNote||’’)];
+if(!session.followups?.length){
+csv+=[…base,…Array(18).fill(q(’’))].join(’,’)+’\n’;
+}else{
+session.followups.forEach(fu=>{
+const elStr=fu.time?calcElapsedStr(session.startTime,fu.time,fu.date):’’;
+const fuBase=[q(fu.time||’’),q(elStr),q(fu.trend||’’),q(fu.impact||’’),q(fu.note||’’)];
+const nm=fu.newMedications||fu.medications||(fu.medication?[fu.medication]:[]);
+const tracks=fu.medTracking||[];
+const treats=fu.treatments||[];
+const maxRows=Math.max(1,nm.length,tracks.length,treats.length);
+for(let i=0;i<maxRows;i++){
+const m=nm[i],mt=tracks[i],t=treats[i];
+csv+=[…base,…fuBase,
+q(m?.name||’’),q(m?.time||’’),q(m?.elapsedMin??’’),q(m?.effect||’’),q(m?.onset||’’),
+q(mt?.name||mt?.medRef||’’),q(mt?.elapsedMin??’’),q(mt?.effect||’’),q(mt?.note||’’),
+q(t?.label||t?.name||’’),q(t?.parts?.join(’/’)||’’),q(t?.effect||’’),q(t?.note||’’)
+].join(’,’)+’\n’;
+}
+});
+}
+});
+const blob=new Blob([csv],{type:‘text/csv;charset=utf-8;’});
+const link=document.createElement(‘a’);
+link.href=URL.createObjectURL(blob);
+link.download=‘頭痛記録.csv’;
+link.click();
+closeExportModal();
+}
 
-        function showSuccessMessage() {
-            const msg = document.getElementById('successMessage');
-            msg.classList.add('show');
-            setTimeout(() => msg.classList.remove('show'), 2000);
-        }
+function exportBoth(){exportPDF();setTimeout(()=>exportCSV(),1000);}
 
-        function showErrorMessage() {
-            const msg = document.getElementById('errorMessage');
-            msg.classList.add('show');
-            setTimeout(() => msg.classList.remove('show'), 3000);
-        }
+function clearAllSessions(){
+if(confirm(‘全ての発作記録を削除してもよろしいですか？’)){
+for(let i=localStorage.length-1;i>=0;i–){
+const key=localStorage.key(i);
+if(key?.startsWith(‘session_’))localStorage.removeItem(key);
+}
+alert(‘全ての記録を削除しました。’);
+updateFollowupForm();updateTimeline();
+}
+}
+</script>
 
-        function openExportModal() {
-            document.getElementById('exportModal').classList.add('show');
-        }
-
-        function closeExportModal() {
-            document.getElementById('exportModal').classList.remove('show');
-        }
-
-        function exportPDF() {
-            const sessions = getAllSessions();
-            if (sessions.length === 0) {
-                alert('記録がありません');
-                return;
-            }
-            let text = '頭痛追跡記録\n\n生成日時: ' + new Date().toLocaleString('ja-JP') + '\n\n';
-            sessions.forEach(session => {
-                text += '=== ' + session.startTime + ' ===\n';
-                text += '程度: ' + (session.severity || 'なし') + '\n';
-                text += '痛み: ' + Object.entries(session.painData).map(([loc, type]) => loc + '(' + type + ')').join(', ') + '\n';
-                if (session.tensions.length) text += '筋緊張: ' + session.tensions.join(', ') + '\n';
-                if (session.otherPains.length) text += '其他: ' + session.otherPains.join(', ') + '\n';
-                if (session.symptoms.length) text += '症状: ' + session.symptoms.join(', ') + '\n';
-                text += '支障度: ' + (session.impact || 'なし') + '\n';
-                if (session.freeNote) text += 'メモ: ' + session.freeNote + '\n';
-                if (session.followups?.length) {
-                    text += '\n追加記録:\n';
-                    session.followups.forEach(fu => {
-                        text += '  ' + fu.time + ': ' + (fu.trend || '-') + '\n';
-                        if (fu.note) text += '    ' + fu.note + '\n';
-                        if (fu.medication) text += '    服薬: ' + fu.medication.name + '\n';
-                    });
-                }
-                text += '\n';
-            });
-            const blob = new Blob([text], { type: 'text/plain;charset=utf-8;' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = '頭痛記録.txt';
-            link.click();
-            showSuccessMessage();
-            closeExportModal();
-        }
-
-        function exportCSV() {
-            const sessions = getAllSessions();
-            if (sessions.length === 0) {
-                alert('記録がありません');
-                return;
-            }
-            const BOM = '\uFEFF';
-            let csv = BOM + '発作開始,程度,痛み,筋緊張,症状,支障度,メモ,追加記録時刻,効き目,薬名\n';
-            sessions.forEach(session => {
-                const painStr = Object.entries(session.painData).map(([loc, type]) => loc + ':' + type).join(';');
-                if (session.followups?.length) {
-                    session.followups.forEach(fu => {
-                        csv += `"${session.startTime}","${session.severity}","${painStr}","${session.tensions.join(',')}","${session.symptoms.join(',')}","${session.impact}","${session.freeNote}","${fu.time}","${fu.medication?.effect || ''}","${fu.medication?.name || ''}"\n`;
-                    });
-                } else {
-                    csv += `"${session.startTime}","${session.severity}","${painStr}","${session.tensions.join(',')}","${session.symptoms.join(',')}","${session.impact}","${session.freeNote}","","",""\n`;
-                }
-            });
-            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = '頭痛記録.csv';
-            link.click();
-            showSuccessMessage();
-            closeExportModal();
-        }
-
-        function exportBoth() {
-            exportPDF();
-            setTimeout(() => exportCSV(), 1000);
-        }
-
-        function clearAllSessions() {
-            if (confirm('全ての発作記録を削除してもよろしいですか？')) {
-                for (let i = localStorage.length - 1; i >= 0; i--) {
-                    const key = localStorage.key(i);
-                    if (key.startsWith('session_')) localStorage.removeItem(key);
-                }
-                alert('全ての記録を削除しました。');
-                updateFollowupForm();
-                updateTimeline();
-            }
-        }
-    </script>
 </body>
 </html>
